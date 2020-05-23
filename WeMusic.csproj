@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D90E7EC3-32D9-4B3A-94D0-6D8D9A5A4651}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>WeMusic</RootNamespace>
+    <AssemblyName>WeMusic</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DMSkin, Version=3.0.0.1000, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DMSkin.3.0.0.1000\lib\net45\DMSkin.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.2.3.1244, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MaterialDesignColors.1.2.3\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=3.1.0.1244, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MaterialDesignThemes.3.1.0\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Expression.Blend.Sdk.WPF.1.0.1\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>packages\Prism.Core.7.2.0.1422\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="SqlSugar, Version=5.0.0.14, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\sqlSugar.5.0.0.14\lib\SqlSugar.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.112.1, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>packages\System.Data.SQLite.Core.1.0.112.2\lib\net40\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Expression.Blend.Sdk.WPF.1.0.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Control\ListOperate.xaml.cs">
+      <DependentUpon>ListOperate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ScrollToControlAction.cs" />
+    <Compile Include="Control\ScrollViewerHelper.cs" />
+    <Compile Include="Control\SpectrumAnalyser.xaml.cs">
+      <DependentUpon>SpectrumAnalyser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Control\Toast.xaml.cs">
+      <DependentUpon>Toast.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\MusicSource.cs" />
+    <Compile Include="Interface\IApi.cs" />
+    <Compile Include="Interface\IMusic.cs" />
+    <Compile Include="Model\CoreApi.cs" />
+    <Compile Include="Model\DbModel\CustomListManager.cs" />
+    <Compile Include="Model\DbModel\CustomListModel.cs" />
+    <Compile Include="Model\DbModel\CustomTitleManager.cs" />
+    <Compile Include="Model\DbModel\CustomTitleModel.cs" />
+    <Compile Include="Model\DbModel\DbContext.cs" />
+    <Compile Include="Model\DbModel\DefaultListManager.cs" />
+    <Compile Include="Model\DbModel\DefaultListModel.cs" />
+    <Compile Include="Model\DbModel\LocalListManager.cs" />
+    <Compile Include="Model\DbModel\MusicInfoManager.cs" />
+    <Compile Include="Model\DialogManager.cs" />
+    <Compile Include="Model\DownloadManager.cs" />
+    <Compile Include="Control\DragSlider.cs" />
+    <Compile Include="Model\MusicModel\KugouMusic.cs" />
+    <Compile Include="Model\DbModel\LocalListModel.cs" />
+    <Compile Include="Model\LyricItem.cs" />
+    <Compile Include="Model\DbModel\MusicInfoModel.cs" />
+    <Compile Include="Model\MusicModel\NeteaseMusic.cs" />
+    <Compile Include="Model\PageManager.cs" />
+    <Compile Include="Model\Player\PlayerManager.cs" />
+    <Compile Include="Converter\TimeSpanConverter.cs" />
+    <Compile Include="Model\Player\PlayerNotification.cs" />
+    <Compile Include="Model\Player\PlayerList.cs" />
+    <Compile Include="Enum\PlayMode.cs" />
+    <Compile Include="Model\SampleAggregator.cs" />
+    <Compile Include="Model\SearchOptionModel.cs" />
+    <Compile Include="Model\MusicModel\TencentMusic.cs" />
+    <Compile Include="Model\ViewModelManager.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Tool\Http\HttpTool.cs" />
+    <Compile Include="Tool\Http\HttpWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tool\IniConfig\Attribute\IniConfigKeyAttribute.cs" />
+    <Compile Include="Tool\IniConfig\Attribute\IniConfigSectionAttribute.cs" />
+    <Compile Include="Tool\IniConfig\Attribute\IniKeyAttribute.cs" />
+    <Compile Include="Tool\IniConfig\Attribute\IniNonSerializeAttribute.cs" />
+    <Compile Include="Tool\IniConfig\Attribute\IniSectionAttribute.cs" />
+    <Compile Include="Tool\IniConfig\Attribute\IniSerializeAttribute.cs" />
+    <Compile Include="Tool\IniConfig\Exception\IniConfigException.cs" />
+    <Compile Include="Tool\IniConfig\Exception\PropertyNotFoundException.cs" />
+    <Compile Include="Tool\IniConfig\Exception\SectionNotFoundException.cs" />
+    <Compile Include="Tool\IniConfig\IniConfig.cs" />
+    <Compile Include="Tool\IniConfig\IniConvert.cs" />
+    <Compile Include="Tool\IniConfig\Linq\IContainer.cs" />
+    <Compile Include="Tool\IniConfig\Linq\IniObject.cs" />
+    <Compile Include="Tool\IniConfig\Linq\IniSection.cs" />
+    <Compile Include="Tool\IniConfig\Linq\IniValue.cs" />
+    <Compile Include="Tool\IniConfig\Linq\IObject.cs" />
+    <Compile Include="Tool\IniConfig\Linq\ISection.cs" />
+    <Compile Include="Tool\IniConfig\Linq\IValue.cs" />
+    <Compile Include="Tool\IniConfig\Linq\IValueType.cs" />
+    <Compile Include="Tool\IniConfig\Utilities\ConvertUtils.cs" />
+    <Compile Include="Tool\IniConfig\Utilities\MathUtils.cs" />
+    <Compile Include="Tool\IniConfig\Utilities\MiscellaneousUtils.cs" />
+    <Compile Include="Tool\IniConfig\Utilities\ReflectionUtils.cs" />
+    <Compile Include="ViewModel\BasePageViewModel.cs" />
+    <Compile Include="ViewModel\CreateListDialogViewModel.cs" />
+    <Compile Include="ViewModel\ListOperateViewModel.cs" />
+    <Compile Include="ViewModel\LyricPageViewModel.cs" />
+    <Compile Include="ViewModel\SearchPageViewModel.cs" />
+    <Compile Include="View\BasePage.xaml.cs">
+      <DependentUpon>BasePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateListDialog.xaml.cs">
+      <DependentUpon>CreateListDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LyricPage.xaml.cs">
+      <DependentUpon>LyricPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SearchPage.xaml.cs">
+      <DependentUpon>SearchPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Control\DataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\DMScrollViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\Expander.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\ListOperate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Control\SpectrumAnalyser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Control\Toast.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\BasePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CreateListDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LyricPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\ImageRadioButton.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="View\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Resources\Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\SearchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\InitData.db" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\HiddenLrcIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DefaultCover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ShowLrcIcon.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="packages\MaterialDesignThemes.3.1.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.3.1.0\build\MaterialDesignThemes.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\MaterialDesignThemes.3.1.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MaterialDesignThemes.3.1.0\build\MaterialDesignThemes.targets'))" />
+    <Error Condition="!Exists('packages\System.Data.SQLite.Core.1.0.112.2\build\net40\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.Data.SQLite.Core.1.0.112.2\build\net40\System.Data.SQLite.Core.targets'))" />
+  </Target>
+  <Import Project="packages\System.Data.SQLite.Core.1.0.112.2\build\net40\System.Data.SQLite.Core.targets" Condition="Exists('packages\System.Data.SQLite.Core.1.0.112.2\build\net40\System.Data.SQLite.Core.targets')" />
+</Project>

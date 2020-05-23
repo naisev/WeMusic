@@ -1,0 +1,33 @@
+﻿“WeMusic.exe”(CLR v4.0.30319: DefaultDomain): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_32\mscorlib\v4.0_4.0.0.0__b77a5c561934e089\mscorlib.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: DefaultDomain): 已加载“D:\code\VS_Tools\Code\WeMusic\bin\Debug\WeMusic.exe”。已加载符号。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework\v4.0_4.0.0.0__31bf3856ad364e35\PresentationFramework.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\WindowsBase\v4.0_4.0.0.0__31bf3856ad364e35\WindowsBase.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_32\PresentationCore\v4.0_4.0.0.0__31bf3856ad364e35\PresentationCore.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Xaml\v4.0_4.0.0.0__b77a5c561934e089\System.Xaml.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“D:\code\Visual Studio\Common7\IDE\PrivateAssemblies\Runtime\Microsoft.VisualStudio.Debugger.Runtime.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+单步执行: 正在逐过程执行非用户代码“WeMusic.App..ctor”
+单步执行: 正在逐过程执行非用户代码“WeMusic.App.InitializeComponent”
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“D:\code\VS_Tools\Code\WeMusic\bin\Debug\DMSkin.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“D:\code\VS_Tools\Code\WeMusic\bin\Debug\MaterialDesignThemes.Wpf.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“D:\code\VS_Tools\Code\WeMusic\bin\Debug\MaterialDesignColors.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\mscorlib.resources\v4.0_4.0.0.0_zh-Hans_b77a5c561934e089\mscorlib.resources.dll”。模块已生成，不包含符号。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“D:\code\VS_Tools\Code\WeMusic\bin\Debug\Prism.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework.Aero2\v4.0_4.0.0.0__31bf3856ad364e35\PresentationFramework.Aero2.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Windows.Controls.Ribbon\v4.0_4.0.0.0__b77a5c561934e089\System.Windows.Controls.Ribbon.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“D:\code\VS_Tools\Code\WeMusic\bin\Debug\System.Windows.Interactivity.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework.resources\v4.0_4.0.0.0_zh-Hans_31bf3856ad364e35\PresentationFramework.resources.dll”。模块已生成，不包含符号。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationCore.resources\v4.0_4.0.0.0_zh-Hans_31bf3856ad364e35\PresentationCore.resources.dll”。模块已生成，不包含符号。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\PresentationFramework-SystemXml\v4.0_4.0.0.0__b77a5c561934e089\PresentationFramework-SystemXml.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“d:\code\visual studio\common7\ide\commonextensions\microsoft\xamldiagnostics\Framework\x86\Microsoft.VisualStudio.DesignTools.WpfTap.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Runtime.Serialization\v4.0_4.0.0.0__b77a5c561934e089\System.Runtime.Serialization.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\SMDiagnostics\v4.0_4.0.0.0__b77a5c561934e089\SMDiagnostics.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.ServiceModel.Internals\v4.0_4.0.0.0__31bf3856ad364e35\System.ServiceModel.Internals.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\UIAutomationTypes\v4.0_4.0.0.0__31bf3856ad364e35\UIAutomationTypes.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\UIAutomationProvider\v4.0_4.0.0.0__31bf3856ad364e35\UIAutomationProvider.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Runtime.Serialization.resources\v4.0_4.0.0.0_zh-Hans_b77a5c561934e089\System.Runtime.Serialization.resources.dll”。模块已生成，不包含符号。
+“WeMusic.exe”(CLR v4.0.30319: WeMusic.exe): 已加载“D:\code\VS_Tools\Code\WeMusic\bin\Debug\NAudio.dll”。已跳过加载符号。模块进行了优化，并且调试器选项“仅我的代码”已启用。
+程序“[11052] WeMusic.exe”已退出，返回值为 -1 (0xffffffff)。

@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="WeMusic.View.CreateListDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WeMusic.View"
+             mc:Ignorable="d" 
+             Height="150"
+             Width="250"
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:attached="clr-namespace:DMSkin.Attached;assembly=DMSkin"
+             xmlns:vm="clr-namespace:WeMusic.ViewModel"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <UserControl.DataContext>
+        <vm:CreateListDialogViewModel/>
+    </UserControl.DataContext>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="新建歌单" VerticalAlignment="Center" FontSize="16"/>
+        <TextBox Grid.Row="1" x:Name="ListName" VerticalAlignment="Center">
+            <TextBox.InputBindings>
+                <KeyBinding Key="Enter" Command="{x:Static md:DialogHost.CloseDialogCommand}" CommandParameter="{Binding ElementName=ListName,Path=Text}"/>
+            </TextBox.InputBindings>
+        </TextBox>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="确认" Width="80" Margin="0,0,20,0" Command="{x:Static md:DialogHost.CloseDialogCommand}" CommandParameter="{Binding ElementName=ListName,Path=Text}" Style="{StaticResource ButtonStyle}"/>
+            <Button Content="取消" Width="80" Margin="20,0,0,0" Command="{x:Static md:DialogHost.CloseDialogCommand}" Style="{StaticResource ButtonStyle}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

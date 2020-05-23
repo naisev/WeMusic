@@ -1,0 +1,91 @@
+﻿<Page x:Class="WeMusic.View.BasePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WeMusic.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="BasePage"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      xmlns:vm="clr-namespace:WeMusic.ViewModel"
+      xmlns:control="clr-namespace:WeMusic.Control"
+      xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Control/DataGrid.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Page.DataContext>
+        <vm:BasePageViewModel></vm:BasePageViewModel>
+    </Page.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded" >
+            <i:InvokeCommandAction Command="{Binding DefaultListCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid Grid.Row="1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Column="0">
+            <StackPanel>
+                <Expander Header="我的音乐" IsExpanded="True" Background="Transparent">
+                    
+                    <StackPanel>
+                        <control:ImageRadioButton Content="默认列表" Style="{StaticResource MenuRadioButtom}" IsChecked="True" GroupName="MenuItem" Command="{Binding DefaultListCommand}"/>
+                        <control:ImageRadioButton Content="本地音乐" Style="{StaticResource MenuRadioButtom}" GroupName="MenuItem"/>
+                    </StackPanel>
+                </Expander>
+                <Expander IsExpanded="True" Background="Transparent" Content="{Binding CustomList}">
+                    <Expander.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="我的歌单" VerticalAlignment="Center" FontSize="16"></TextBlock>
+                            <Button Style="{StaticResource MaterialDesignIconButton}" Command="{Binding AddListCommand}"
+                                    Height="30" Width="30" Margin="0,0,-70,0">
+                                <md:PackIcon Kind="Add" Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Center" Width="20"></md:PackIcon>
+                            </Button>
+                        </StackPanel>
+                    </Expander.Header>
+                </Expander>
+                <Expander Header="收藏歌单" IsExpanded="True" Background="Transparent">
+                    <StackPanel>
+                        <control:ImageRadioButton Content="歌单1" Style="{StaticResource MenuRadioButtom}" GroupName="MenuItem"/>
+                        <control:ImageRadioButton Content="歌单2" Style="{StaticResource MenuRadioButtom}" GroupName="MenuItem"/>
+                        <control:ImageRadioButton Content="歌单3" Style="{StaticResource MenuRadioButtom}" GroupName="MenuItem"/>
+                        <control:ImageRadioButton Content="歌单4" Style="{StaticResource MenuRadioButtom}" GroupName="MenuItem"/>
+                        <control:ImageRadioButton Content="歌单5" Style="{StaticResource MenuRadioButtom}" GroupName="MenuItem"/>
+                        <control:ImageRadioButton Content="歌单6" Style="{StaticResource MenuRadioButtom}" GroupName="MenuItem"/>
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+        </ScrollViewer>
+
+        <DataGrid Grid.Column="1" AutoGenerateColumns="False" x:Name="dgv" Background="Transparent" CanUserReorderColumns="False"
+                  ItemsSource="{Binding MusicInfos}" CanUserAddRows="False" CanUserSortColumns="False" IsReadOnly="True">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick" >
+                    <i:InvokeCommandAction Command="{Binding PrePlayCommand}" 
+                                           CommandParameter="{Binding SelectedItem,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="歌曲名" Width="4*" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="歌手" Width="2*" Binding="{Binding Artists}"></DataGridTextColumn>
+                <DataGridTextColumn Header="专辑" Width="2*" Binding="{Binding Album}"></DataGridTextColumn>
+                <DataGridTextColumn Header="来源" Width="1*" Binding="{Binding SourceName}"></DataGridTextColumn>
+                <DataGridTemplateColumn Width="120" Header="操作">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <control:ListOperate x:Name="lstOp"></control:ListOperate>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
