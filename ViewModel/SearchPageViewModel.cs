@@ -179,7 +179,7 @@ namespace WeMusic.ViewModel
                 MessageBox.Show($"搜索失败！\n{e.Message}");
             }
 
-
+            PlayerList.SetPreList(MusicInfos, "搜索");
             //UI
             SearchProgressVisibility = Visibility.Hidden;
             DataVisibility = MusicInfos.Count == 0 ? Visibility.Hidden : Visibility.Visible;
@@ -203,7 +203,7 @@ namespace WeMusic.ViewModel
             ini.SetObject(SearchOption);
             ini.Save();
             MusicInfos.Where(t => t.Origin == MusicSource.Netease).ToList().ForEach(item => MusicInfos.Remove(item));
-            
+            PlayerList.SetPreList(MusicInfos, "搜索");
         }
 
         public void ClickKugouExecute(object parameter)
@@ -213,6 +213,7 @@ namespace WeMusic.ViewModel
             ini.SetObject(SearchOption);
             ini.Save();
             MusicInfos.Where(t => t.Origin == MusicSource.Kugou).ToList().ForEach(item => MusicInfos.Remove(item));
+            PlayerList.SetPreList(MusicInfos, "搜索");
         }
 
         public void ClickTencentExecute(object parameter)
@@ -222,6 +223,7 @@ namespace WeMusic.ViewModel
             ini.SetObject(SearchOption);
             ini.Save();
             MusicInfos.Where(t => t.Origin == MusicSource.Tencent).ToList().ForEach(item => MusicInfos.Remove(item));
+            PlayerList.SetPreList(MusicInfos, "搜索");
         }
     }
 }

@@ -28,6 +28,7 @@ namespace WeMusic.Model.DbModel
         public SimpleClient<LocalListModel> LocalListDb { get { return new SimpleClient<LocalListModel>(Db); } }
         public SimpleClient<CustomListModel> CustomListDb { get { return new SimpleClient<CustomListModel>(Db); } }
         public SimpleClient<CustomTitleModel> CustomTitleDb { get { return new SimpleClient<CustomTitleModel>(Db); } }
+        public SimpleClient<SearchHistoryModel> SearchHistoryDb { get { return new SimpleClient<SearchHistoryModel>(Db); } }
         public SimpleClient<T> CurrentDb { get { return new SimpleClient<T>(Db); } }//用来处理T表的常用操作
 
 

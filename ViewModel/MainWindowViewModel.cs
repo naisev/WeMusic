@@ -186,7 +186,7 @@ namespace WeMusic.ViewModel
             }
         }
 
-        private double _volume = 1;
+        private double _volume = PlayerManager.Volume;
         public double Volume
         {
             get { return _volume; }
@@ -337,6 +337,9 @@ namespace WeMusic.ViewModel
         public DelegateCommand ClickNextMusicCommand { get; set; }
         public DelegateCommand<object> ChangePlayModeCommand { get; set; }
 
+        /// <summary>
+        /// 窗口最小化
+        /// </summary>
         public void ClickMaximizedExecute()
         {
             switch (State)
@@ -357,12 +360,18 @@ namespace WeMusic.ViewModel
             }
         }
 
+        /// <summary>
+        /// 点击播放
+        /// </summary>
         public void ClickPlayExecute()
         {
             if (PlayerManager.PlayMusic == null) { return; }
             PlayerManager.Play();
         }
 
+        /// <summary>
+        /// 点击暂停
+        /// </summary>
         public void ClickPauseExecute()
         {
             PlayerManager.Pause();
@@ -370,12 +379,19 @@ namespace WeMusic.ViewModel
             PauseButtonVisibility = Visibility.Hidden;
         }
 
+        /// <summary>
+        /// 搜索
+        /// </summary>
         public void ClickSearchExecute()
         {
             CurrentPage = PageManager.SearchPage;
             (PageManager.SearchPage.DataContext as SearchPageViewModel).SearchContent = SearchContent;
         }
 
+        /// <summary>
+        /// 音乐进度改变
+        /// </summary>
+        /// <param name="parameter"></param>
         public void MusicPositionChangedExecute(object parameter)
         {
             if (PlayerManager.State == NAudio.Wave.PlaybackState.Stopped) { return; }
@@ -425,6 +441,10 @@ namespace WeMusic.ViewModel
             PauseButtonVisibility = Visibility.Hidden;
             CoverSource = new Uri("/Resources/DefaultCover.png", UriKind.Relative);
         }
+
+        /// <summary>
+        /// 鼠标移出封面
+        /// </summary>
         public void MouseMovedCoverExecute()
         {
             HiddenCoverVisibility = Visibility.Visible;
@@ -438,6 +458,9 @@ namespace WeMusic.ViewModel
             }
         }
 
+        /// <summary>
+        /// 点击封面
+        /// </summary>
         public void CoverClickExecute()
         {
             if (CurrentPage != PageManager.LyricPage)
@@ -475,12 +498,18 @@ namespace WeMusic.ViewModel
             catch { }
         }
 
+        /// <summary>
+        /// 关闭窗口
+        /// </summary>
         public void CloseWindow()
         {
             PlayerManager.Stop();
             Application.Current.MainWindow.Close();
         }
 
+        /// <summary>
+        /// 点击上一首歌
+        /// </summary>
         public void ClickPreviousMusicExecute()
         {
             PlayerManager.Stop();
@@ -495,6 +524,9 @@ namespace WeMusic.ViewModel
             }
         }
 
+        /// <summary>
+        /// 点击下一首歌
+        /// </summary>
         public void ClickNextMusicExecute()
         {
             PlayerManager.Stop();
@@ -509,6 +541,10 @@ namespace WeMusic.ViewModel
             }
         }
 
+        /// <summary>
+        /// 改变播放模式
+        /// </summary>
+        /// <param name="parameter"></param>
         public void ChangePlayModeExecute(object parameter)
         {
             int.TryParse(parameter.ToString(), out int mode);

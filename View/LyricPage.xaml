@@ -74,12 +74,12 @@
             <!--Music Infomation-->
             <StackPanel Grid.Row="1">
                 <TextBlock Text="{Binding MusicName}" FontSize="24" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Text="{Binding MusicArtist,StringFormat=歌手：{0}}" FontSize="14" HorizontalAlignment="Center" Margin="0,20,0,0" Foreground="DimGray"></TextBlock>
-                <TextBlock Text="{Binding Album,StringFormat=专辑：{0}}" FontSize="14" HorizontalAlignment="Center" Foreground="DimGray"></TextBlock>
+                <TextBlock Text="{Binding MusicArtist,StringFormat=歌手：{0}}" FontSize="14" HorizontalAlignment="Center" Margin="0,20,0,0" Foreground="{DynamicResource PrimaryHueMidBrush}"></TextBlock>
+                <TextBlock Text="{Binding Album,StringFormat=专辑：{0}}" FontSize="14" HorizontalAlignment="Center" Foreground="{DynamicResource PrimaryHueMidBrush }"></TextBlock>
             </StackPanel>
         </Grid>
 
-        <ScrollViewer Grid.Column="1" Content="{Binding LrcContent}" x:Name="LrcView" Margin="0,50,0,50">
+        <ScrollViewer Grid.Column="1" Content="{Binding LrcContent}" x:Name="LrcView" Margin="0,50,0,50" VerticalScrollBarVisibility="Hidden">
         </ScrollViewer>
     </Grid>
 </Page>
