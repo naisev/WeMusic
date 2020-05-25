@@ -39,12 +39,13 @@ namespace WeMusic.Model
                 {
                     string url = $"https://api.qq.jsososo.com/search?key={content}&pageNo=1&pageSize=10";
                     byte[] data = HttpWebClient.Get(url);
-                    TencentMusic[] infos = JsonConvert.DeserializeObject<TencentMusic[]>(JObject.Parse(Encoding.UTF8.GetString(data))["data"]["list"].ToString());
+                    TencentMusic[] infos = JsonConvert.DeserializeObject<TencentMusic[]>(JObject.Parse(Encoding.UTF8.GetString(data))?["data"]?["list"].ToString());
                     return infos;
                 }
-            }catch(Exception e)
+            }
+            catch (Exception)
             {
-                throw e;
+                return new IMusic[0];
             }
             
         }

@@ -120,6 +120,8 @@
     <Compile Include="Model\DbModel\DefaultListModel.cs" />
     <Compile Include="Model\DbModel\LocalListManager.cs" />
     <Compile Include="Model\DbModel\MusicInfoManager.cs" />
+    <Compile Include="Model\DbModel\SearchHistoryManager.cs" />
+    <Compile Include="Model\DbModel\SearchHistoryModel.cs" />
     <Compile Include="Model\DialogManager.cs" />
     <Compile Include="Model\DownloadManager.cs" />
     <Compile Include="Control\DragSlider.cs" />

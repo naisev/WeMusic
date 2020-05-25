@@ -66,28 +66,68 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
+                
                 <TextBlock Text="微音乐" Width="100" VerticalAlignment="Center" FontSize="18" TextAlignment="Center"></TextBlock>
                 <!--Search Box-->
-                <TextBox x:Name="SearchBox" Grid.Column="1" VerticalAlignment="Center" attached:Hint.HintText="搜索音乐" attached:Icon.Geometry="{StaticResource Search}"
-                     Style="{StaticResource TextBoxIconStyle_Right}" WindowChrome.IsHitTestVisibleInChrome="True" Text="{Binding SearchContent,UpdateSourceTrigger=PropertyChanged}">
+                <TextBox Grid.Column="1" x:Name="SearchBox" VerticalAlignment="Center" attached:Hint.HintText="搜索音乐" attached:Icon.Geometry="{StaticResource Search}"
+                     Style="{StaticResource TextBoxIconStyle_Right}" WindowChrome.IsHitTestVisibleInChrome="True"
+                         Text="{Binding SearchContent,UpdateSourceTrigger=PropertyChanged}">
                     <TextBox.InputBindings>
                         <KeyBinding Key="Enter" Command="{Binding ClickSearchCommand}"/>
                     </TextBox.InputBindings>
+                    <TextBox.Triggers>
+                        <EventTrigger RoutedEvent="PreviewMouseLeftButtonUp">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <BooleanAnimationUsingKeyFrames Storyboard.TargetName="SearchHistoryContent" Storyboard.TargetProperty="IsOpen">
+                                            <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True" />
+                                        </BooleanAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </TextBox.Triggers>
                 </TextBox>
-                <Popup Grid.Column="1" Placement="Bottom" PlacementTarget="{Binding ElementName=SearchBox}" AllowsTransparency="True">
-                    <Popup.Style>
-                        <Style TargetType="Popup">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsSelectionActive, ElementName=SearchBox}" Value="True">
-                                    <Setter Property="IsOpen"  Value="True" ></Setter>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Popup.Style>
-                    <md:Card Width="{Binding ElementName=SearchBox,Path=ActualWidth}" Margin="10">
-                        <StackPanel>
-                            <Button Content="test" Width="{Binding ElementName=SearchBox,Path=Width}" Margin="10"/>
-                        </StackPanel>
+                <!--Search History Box-->
+                <Popup Grid.Column="1" Placement="Bottom" PlacementTarget="{Binding ElementName=SearchBox}" AllowsTransparency="True" 
+                       x:Name="SearchHistoryContent" StaysOpen="False">
+                    <Popup.Triggers>
+                        <EventTrigger RoutedEvent="MouseLeftButtonUp">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <BooleanAnimationUsingKeyFrames Storyboard.TargetName="SearchHistoryContent" Storyboard.TargetProperty="IsOpen">
+                                            <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="False" />
+                                        </BooleanAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Popup.Triggers>
+                    <md:Card Width="{Binding ElementName=SearchBox,Path=ActualWidth}" Margin="5" x:Name="test">
+                        <ListBox Cursor="Hand" ItemsSource="{Binding SearchHistoryList}">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel></StackPanel>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <DockPanel Width="{Binding ElementName=SearchBox,Path=ActualWidth}" >
+                                        
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                <i:InvokeCommandAction Command="{Binding DataContext.ClickSearchHistoryCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}}" 
+                                                                       CommandParameter="{Binding SearchContent}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                        <TextBlock Text="{Binding UntilTime}" DockPanel.Dock="Right" Margin="0,0,16,0" Foreground="{DynamicResource GrayColor2}"/>
+                                        <TextBlock Text="{Binding SearchContent}" DockPanel.Dock="Left"/>
+                                    </DockPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </md:Card>
                 </Popup>
 

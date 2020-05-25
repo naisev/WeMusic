@@ -28,6 +28,18 @@ namespace WeMusic.ViewModel
         public MainWindowViewModel()
         {
             ViewModelManager.MainWindowViewModel = this;
+            var historys = new SearchHistoryManager().GetList();
+            if (historys.Count <= 10)
+            {
+                SearchHistoryList = new ObservableCollection<SearchHistoryModel>();
+                historys.ForEach(item => { SearchHistoryList.Insert(0, item); });
+            }
+            else
+            {
+                SearchHistoryList = new ObservableCollection<SearchHistoryModel>();
+                historys.GetRange(historys.Count - 10, 10).ForEach(item => { SearchHistoryList.Insert(0, item); });
+            }
+
             //Init();
             ClickMinimizedCommand = new DelegateCommand(new Action(() => State = WindowState.Minimized));
             ClickClosedCommand = new DelegateCommand(new Action(CloseWindow));
@@ -46,6 +58,7 @@ namespace WeMusic.ViewModel
             ClickNextMusicCommand = new DelegateCommand(new Action(ClickNextMusicExecute));
             PlayModeIcon = Application.Current.FindResource("PlaySingle") as Geometry;
             ChangePlayModeCommand = new DelegateCommand<object>(new Action<object>(ChangePlayModeExecute));
+            ClickSearchHistoryCommand = new DelegateCommand<object>(new Action<object>(ClickSearchHistoryExecute));
         }
 
         private WindowState _state = WindowState.Normal;
@@ -318,6 +331,27 @@ namespace WeMusic.ViewModel
             }
         }
 
+        private ObservableCollection<SearchHistoryModel> _searchHistoryList = new ObservableCollection<SearchHistoryModel>();
+        public ObservableCollection<SearchHistoryModel> SearchHistoryList
+        {
+            get { return _searchHistoryList; }
+            set
+            {
+                _searchHistoryList = value;
+                this.RaisePropertyChanged("SearchHistoryList");
+            }
+        }
+
+        private bool _searchHistoryIsOpen = false;
+        public bool SearchHistoryIsOpen
+        {
+            get { return _searchHistoryIsOpen; }
+            set
+            {
+                _searchHistoryIsOpen = value;
+                this.RaisePropertyChanged("SearchHistoryIsOpen");
+            }
+        }
 
         public DelegateCommand ClickMinimizedCommand { get; set; }
         public DelegateCommand ClickMaximizedCommand { get; set; }
@@ -336,6 +370,7 @@ namespace WeMusic.ViewModel
         public DelegateCommand ClickPreviousMusicCommand { get; set; }
         public DelegateCommand ClickNextMusicCommand { get; set; }
         public DelegateCommand<object> ChangePlayModeCommand { get; set; }
+        public DelegateCommand<object> ClickSearchHistoryCommand { get; set; }
 
         /// <summary>
         /// 窗口最小化
@@ -384,6 +419,12 @@ namespace WeMusic.ViewModel
         /// </summary>
         public void ClickSearchExecute()
         {
+            SearchHistoryIsOpen = false;
+            var shm = new SearchHistoryModel(SearchContent);
+            new SearchHistoryManager().Insert(shm);
+            //如果搜索历史列表项大于等于10个，移出最后一个
+            if (SearchHistoryList.Count >= 10) { SearchHistoryList.RemoveAt(9); }
+            SearchHistoryList.Insert(0, shm);
             CurrentPage = PageManager.SearchPage;
             (PageManager.SearchPage.DataContext as SearchPageViewModel).SearchContent = SearchContent;
         }
@@ -567,6 +608,16 @@ namespace WeMusic.ViewModel
                     PlayerList.Mode = PlayMode.SinglePlay;
                     break;
             }
+        }
+
+        /// <summary>
+        /// 点击搜索列表
+        /// </summary>
+        /// <param name="parameter"></param>
+        public void ClickSearchHistoryExecute(object parameter)
+        {
+            SearchContent = parameter?.ToString();
+            ClickSearchExecute();
         }
     }
 }

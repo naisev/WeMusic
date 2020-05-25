@@ -39,6 +39,7 @@ namespace WeMusic
                 conn.CodeFirst.InitTables<DefaultListModel>();
                 conn.CodeFirst.InitTables<MusicInfoModel>();
                 conn.CodeFirst.InitTables<LocalListModel>();
+                conn.CodeFirst.InitTables<SearchHistoryModel>();
                 conn.Dispose();
             }
         }
