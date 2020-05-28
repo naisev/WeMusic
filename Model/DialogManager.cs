@@ -14,5 +14,10 @@ namespace WeMusic.Model
         {
             return await DialogHost.Show(new CreateListDialog());
         }
+
+        public async static Task<object> ShowDownloadDialog(object parameter)
+        {
+            return await DialogHost.Show(new DownloadDialog(parameter));
+        }
     }
 }

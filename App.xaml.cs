@@ -1,4 +1,6 @@
-﻿using SqlSugar;
+﻿using Native.Tool.IniConfig;
+using Native.Tool.IniConfig.Linq;
+using SqlSugar;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using WeMusic.Model;
 using WeMusic.Model.DbModel;
 using WeMusic.ViewModel;
 
@@ -41,6 +44,18 @@ namespace WeMusic
                 conn.CodeFirst.InitTables<LocalListModel>();
                 conn.CodeFirst.InitTables<SearchHistoryModel>();
                 conn.Dispose();
+
+            }
+            IniConfig ini = new IniConfig("Config.ini");
+            ini.Load();
+            bool result = ini.Object["System"].TryGetValue("DownloadPath", out IValue v);
+            if (!result || v?.ToString() == string.Empty)
+            {
+                DownloadManager.MusicDownloadPath = AppDomain.CurrentDomain.BaseDirectory + "Download\\";
+            }
+            else
+            {
+                DownloadManager.MusicDownloadPath = v.ObjToString();
             }
         }
     }

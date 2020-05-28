@@ -6,7 +6,6 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using WeMusic.ViewModel;
 using NAudio;
 using NAudio.Wave;
 using System.Net;
@@ -14,6 +13,7 @@ using WeMusic.Interface;
 using NAudio.Wave.SampleProviders;
 using System.Windows.Media;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace WeMusic.Model.Player
 {
@@ -56,7 +56,7 @@ namespace WeMusic.Model.Player
             //主页面设置缓冲中状态
             ViewModelManager.MainWindowViewModel.SetBufferState();
             //异步加载音乐
-            await System.Threading.Tasks.Task.Run(new Action(() =>
+            await Task.Run(new Action(() =>
             {
                 PrePlay();
             }));
@@ -86,10 +86,11 @@ namespace WeMusic.Model.Player
 
             //当前进度设置
             PlayerNotification.Start();
-            if (!File.Exists(DownloadManager.MusicCachePath + PlayMusic.Id + ".tmp"))
+
+            /*if (!File.Exists(DownloadManager.MusicCachePath + PlayMusic.Id + ".tmp"))
             {
                 DownloadManager.DownloadFileAsync(Source, DownloadManager.MusicCachePath, PlayMusic.Id + ".tmp");
-            }
+            }*/
         }
 
         public static void Play(string url)
@@ -178,12 +179,6 @@ namespace WeMusic.Model.Player
                 Source = (PlayMusic as IApi).GetMusicUrl();
             }
 
-            //专辑封面缓存检测
-            if (!File.Exists(DownloadManager.CoverCachePath + PlayMusic.Id + ".jpg"))
-            {
-                DownloadManager.DownloadFile((PlayMusic as IApi).GetCoverUrl(), DownloadManager.CoverCachePath, PlayMusic.Id + ".jpg");
-            }
-
             //歌词缓存检测
             if (File.Exists(DownloadManager.LyricCachePath + PlayMusic.Id + ".lrc"))
             {
@@ -196,6 +191,22 @@ namespace WeMusic.Model.Player
                 Lyric = LyricItem.Parse(lyric);
             }
 
+            //专辑封面缓存检测
+            /*if (!File.Exists(DownloadManager.CoverCachePath + PlayMusic.Id + ".jpg"))
+            {
+                //异步下载图片
+                DownloadManager.DownloadFileAsync((PlayMusic as IApi).GetCoverUrl(), DownloadManager.CoverCachePath, PlayMusic.Id + ".jpg", null,
+                    new Action<object, int>((sender, e) =>
+                    {
+                        if (PageManager.CurrentPage == PageManager.LyricPage)
+                        {
+                            ViewModelManager.MainWindowViewModel.SetBackground(1);
+                        }
+                        ViewModelManager.MainWindowViewModel.CoverSource = new Uri($"pack://siteoforigin:,,,/Cache/Cover/{PlayMusic.Id}.jpg", UriKind.Absolute);
+                        Console.WriteLine("————————————完成" + PlayMusic.Id);
+                    }));
+            }*/
+
             //如果当前页面是歌词页面，重新加载歌词页面
             if (PageManager.CurrentPage == PageManager.LyricPage)
             {
@@ -203,7 +214,6 @@ namespace WeMusic.Model.Player
                 Application.Current.Dispatcher.Invoke(new Action(() =>
                 {
                     ViewModelManager.LyricPageViewModel.Init(Lyric);
-                    ViewModelManager.MainWindowViewModel.SetBackground(1);
                 }));
             }
         }

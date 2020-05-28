@@ -23,6 +23,7 @@ namespace WeMusic.ViewModel
         {
             PrePlayCommand = new DelegateCommand<object>(new Action<object>(PrePlayExecute));
             PreMenuCommand = new DelegateCommand<object>(new Action<object>(PreMenuExecute));
+            DownloadCommand = new DelegateCommand<object>(new Action<object>(DownloadExecute));
             Menus = new ObservableCollection<object>();
 
             Menus.Add(new MenuItem
@@ -59,6 +60,7 @@ namespace WeMusic.ViewModel
 
         public DelegateCommand<object> PrePlayCommand { get; set; }
         public DelegateCommand<object> PreMenuCommand { get; set; }
+        public DelegateCommand<object> DownloadCommand { get; set; }
 
         public void PrePlayExecute(object parameter)
         {
@@ -107,6 +109,11 @@ namespace WeMusic.ViewModel
             mim.Insert(new MusicInfoModel(menuParameter as IMusic));
             ViewModelManager.BasePageViewModel.RefreshShowList(parameter.ToString());
             Toast.Show("添加成功！", Toast.InfoType.Success);
+        }
+
+        public async void DownloadExecute(object parameter)
+        {
+            await DialogManager.ShowDownloadDialog(parameter);
         }
     }
 }

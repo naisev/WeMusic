@@ -448,6 +448,8 @@ namespace WeMusic.ViewModel
             MusicName = "加载中...";
             MusicArtist = "";
             MusicConnection = "";
+            MusicNowTime = new TimeSpan(0);
+            MusicMaxTime = new TimeSpan(1);
         }
 
         /// <summary>
@@ -460,14 +462,6 @@ namespace WeMusic.ViewModel
             MusicConnection = " - ";
             PlayButtonVisibility = Visibility.Hidden;
             PauseButtonVisibility = Visibility.Visible;
-            try
-            {
-                CoverSource = new Uri($"pack://siteoforigin:,,,/Cache/Cover/{PlayerManager.PlayMusic.Id}.jpg", UriKind.Absolute);
-            }
-            catch
-            {
-                CoverSource = new Uri("/Resources/DefaultCover.png", UriKind.Relative);
-            }
         }
 
         /// <summary>

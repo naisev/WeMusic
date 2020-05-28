@@ -1,4 +1,7 @@
-﻿using Native.Tool.Http;
+﻿using Masuit.Tools.Net;
+using Native.Tool.Http;
+using Native.Tool.IniConfig;
+using Native.Tool.IniConfig.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -40,9 +43,41 @@ namespace WeMusic.Model
                 return path;
             }
         }
-        public static void DownloadFileAsync(string url, string path, string name)
+
+        private static string _musicDownloadPath;
+        public static string MusicDownloadPath
         {
-            new Task(new Action(() =>
+            get
+            {
+                Directory.CreateDirectory(_musicDownloadPath);
+                return _musicDownloadPath;
+            }
+            set
+            {
+                _musicDownloadPath = value;
+                IniConfig ini = new IniConfig("Config.ini");
+                ini.Load();
+                ini.Object["System"]["DownloadPath"] = value;
+                ini.Save();
+            }
+        }
+
+        public static void DownloadFileAsync(string url, string path, string name,
+            Action<object, EventArgs> progressChangedAction = null, Action<object, int> completedAction = null)
+        {
+            if (!Directory.Exists(path)) { return; }
+            if (!path.EndsWith("\\")) { path += "\\"; }
+            var mtd = new MultiThreadDownloader(url, path + name, 1);
+            if (progressChangedAction != null)
+            {
+                mtd.TotalProgressChanged += (sender, e) => progressChangedAction.Invoke(sender, e);
+            }
+            if (completedAction != null)
+            {
+                mtd.FileMergeProgressChanged += (sender, e) => completedAction.Invoke(sender, e);
+            }
+            mtd.Start();
+            /*new Task(new Action(() =>
             {
                 if (!Directory.Exists(path)) { return; }
                 if (!path.EndsWith("\\")) { path += "\\"; }
@@ -63,14 +98,24 @@ namespace WeMusic.Model
 
                 }
 
-            })).Start();
+            })).Start();*/
 
         }
 
-        public static bool DownloadFile(string url, string path, string name)
+        /*public static bool DownloadFile(string url, string path, string name, Action<object, int> action)
         {
             if (!Directory.Exists(path)) { return false; }
             if (!path.EndsWith("\\")) { path += "\\"; }
+
+            var mtd = new MultiThreadDownloader(url, path + name, 8);
+            if (action != null)
+            {
+                mtd.FileMergeProgressChanged += (sender, e) =>
+                {
+                    action.Invoke(sender, e);
+                };
+            }
+            return true;
 
             try
             {
@@ -87,7 +132,7 @@ namespace WeMusic.Model
             {
                 return false;
             }
-        }
+        }*/
 
         public static void SaveFile(byte[] data, string path, string name)
         {

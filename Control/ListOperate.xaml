@@ -44,7 +44,9 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type Button}">
-                                <Button Height="25" Width="25" Style="{StaticResource MaterialDesignIconButton}">
+                                <Button Height="25" Width="25" Style="{StaticResource MaterialDesignIconButton}"
+                                        Command="{Binding DataContext.DownloadCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                        CommandParameter="{Binding SelectedItem,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid,AncestorLevel=1}}">
                                     <md:PackIcon x:Name="IconPlay" Kind="Download" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray"></md:PackIcon>
                                 </Button>
                                 <ControlTemplate.Triggers>
