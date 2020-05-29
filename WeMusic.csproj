@@ -126,6 +126,7 @@
     <Compile Include="Enum\MusicSource.cs" />
     <Compile Include="Interface\IApi.cs" />
     <Compile Include="Interface\IMusic.cs" />
+    <Compile Include="Interface\ISongList.cs" />
     <Compile Include="Model\CoreApi.cs" />
     <Compile Include="Model\DbModel\CustomListManager.cs" />
     <Compile Include="Model\DbModel\CustomListModel.cs" />
@@ -141,11 +142,14 @@
     <Compile Include="Model\DialogManager.cs" />
     <Compile Include="Model\DownloadManager.cs" />
     <Compile Include="Control\DragSlider.cs" />
+    <Compile Include="Model\MusicModel\KugouList.cs" />
     <Compile Include="Model\MusicModel\KugouMusic.cs" />
     <Compile Include="Model\DbModel\LocalListModel.cs" />
     <Compile Include="Model\LyricItem.cs" />
     <Compile Include="Model\DbModel\MusicInfoModel.cs" />
+    <Compile Include="Model\MusicModel\NeteaseList.cs" />
     <Compile Include="Model\MusicModel\NeteaseMusic.cs" />
+    <Compile Include="Model\MusicModel\TencentList.cs" />
     <Compile Include="Model\PageManager.cs" />
     <Compile Include="Model\Player\PlayerManager.cs" />
     <Compile Include="Converter\TimeSpanConverter.cs" />

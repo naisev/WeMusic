@@ -26,6 +26,7 @@ namespace WeMusic.ViewModel
             DefaultListCommand = new DelegateCommand(new Action(DefaultListExecute));
             PrePlayCommand = new DelegateCommand<object>(new Action<object>(PrePlayExecute));
             AddListCommand = new DelegateCommand(new Action(AddListExecute));
+            ClickImportListCommand = new DelegateCommand(new Action(ClickImportListExecute));
             DefaultListExecute();
             RefreshCustomList();
         }
@@ -54,6 +55,7 @@ namespace WeMusic.ViewModel
         public DelegateCommand DefaultListCommand { get; set; }
         public DelegateCommand<object> PrePlayCommand { get; set; }
         public DelegateCommand AddListCommand { get; set; }
+        public DelegateCommand ClickImportListCommand { get; set; }
 
         public void DefaultListExecute()
         {
@@ -175,6 +177,12 @@ namespace WeMusic.ViewModel
                     });
                 }
             }
+        }
+
+        public void ClickImportListExecute()
+        {
+            var a=CoreApi.GetPlatformSongList(Enum.MusicSource.Kugou, "https://t4.kugou.com/song.html?id=7tWi39bwlV2");
+            Console.WriteLine((a.Musics[0] as IApi).GetMusicUrl());
         }
     }
 }
