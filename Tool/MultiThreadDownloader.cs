@@ -378,16 +378,21 @@ namespace Masuit.Tools.Net
             _request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36";
             _request.ServicePoint.ConnectionLimit = 4;
             _requestConfigure(_request);
-            using var resp = _request.GetResponse() as HttpWebResponse;
-            redirectedUrl = resp.ResponseUri.OriginalString;
-            var ctl = resp.ContentLength;
-            rangeAllowed = resp.Headers.AllKeys.Select((v, i) => new
+            try
             {
-                HeaderName = v,
-                HeaderValue = resp.Headers[i]
-            }).Any(k => k.HeaderName.ToLower().Contains("range") && k.HeaderValue.ToLower().Contains("byte"));
-            _request.Abort();
-            return ctl;
+                using var resp = _request.GetResponse() as HttpWebResponse;
+                redirectedUrl = resp.ResponseUri.OriginalString;
+                var ctl = resp.ContentLength;
+                rangeAllowed = resp.Headers.AllKeys.Select((v, i) => new
+                {
+                    HeaderName = v,
+                    HeaderValue = resp.Headers[i]
+                }).Any(k => k.HeaderName.ToLower().Contains("range") && k.HeaderValue.ToLower().Contains("byte"));
+                _request.Abort();
+                return ctl;
+            }
+            catch { throw; }
+            
         }
 
         #endregion

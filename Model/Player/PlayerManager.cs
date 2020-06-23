@@ -87,10 +87,10 @@ namespace WeMusic.Model.Player
             //当前进度设置
             PlayerNotification.Start();
 
-            /*if (!File.Exists(DownloadManager.MusicCachePath + PlayMusic.Id + ".tmp"))
+            if (!File.Exists(DownloadManager.MusicCachePath + PlayMusic.Id + ".tmp"))
             {
                 DownloadManager.DownloadFileAsync(Source, DownloadManager.MusicCachePath, PlayMusic.Id + ".tmp");
-            }*/
+            }
         }
 
         public static void Play(string url)
@@ -192,7 +192,7 @@ namespace WeMusic.Model.Player
             }
 
             //专辑封面缓存检测
-            /*if (!File.Exists(DownloadManager.CoverCachePath + PlayMusic.Id + ".jpg"))
+            if (!File.Exists(DownloadManager.CoverCachePath + PlayMusic.Id + ".jpg"))
             {
                 //异步下载图片
                 DownloadManager.DownloadFileAsync((PlayMusic as IApi).GetCoverUrl(), DownloadManager.CoverCachePath, PlayMusic.Id + ".jpg", null,
@@ -203,9 +203,16 @@ namespace WeMusic.Model.Player
                             ViewModelManager.MainWindowViewModel.SetBackground(1);
                         }
                         ViewModelManager.MainWindowViewModel.CoverSource = new Uri($"pack://siteoforigin:,,,/Cache/Cover/{PlayMusic.Id}.jpg", UriKind.Absolute);
-                        Console.WriteLine("————————————完成" + PlayMusic.Id);
                     }));
-            }*/
+            }
+            else
+            {
+                if (PageManager.CurrentPage == PageManager.LyricPage)
+                {
+                    ViewModelManager.MainWindowViewModel.SetBackground(1);
+                }
+                ViewModelManager.MainWindowViewModel.CoverSource = new Uri($"pack://siteoforigin:,,,/Cache/Cover/{PlayMusic.Id}.jpg", UriKind.Absolute);
+            }
 
             //如果当前页面是歌词页面，重新加载歌词页面
             if (PageManager.CurrentPage == PageManager.LyricPage)

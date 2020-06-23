@@ -179,10 +179,9 @@ namespace WeMusic.ViewModel
             }
         }
 
-        public void ClickImportListExecute()
+        public async void ClickImportListExecute()
         {
-            var a=CoreApi.GetPlatformSongList(Enum.MusicSource.Kugou, "https://t4.kugou.com/song.html?id=7tWi39bwlV2");
-            Console.WriteLine((a.Musics[0] as IApi).GetMusicUrl());
+            await DialogManager.ShowPlatformListDialog("");
         }
     }
 }

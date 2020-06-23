@@ -199,6 +199,7 @@
     <Compile Include="ViewModel\DownloadDialogViewModel.cs" />
     <Compile Include="ViewModel\ListOperateViewModel.cs" />
     <Compile Include="ViewModel\LyricPageViewModel.cs" />
+    <Compile Include="ViewModel\PlatformListDialogViewModel.cs" />
     <Compile Include="ViewModel\SearchPageViewModel.cs" />
     <Compile Include="View\BasePage.xaml.cs">
       <DependentUpon>BasePage.xaml</DependentUpon>
@@ -211,6 +212,9 @@
     </Compile>
     <Compile Include="View\LyricPage.xaml.cs">
       <DependentUpon>LyricPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PlatformListDialog.xaml.cs">
+      <DependentUpon>PlatformListDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
@@ -272,6 +276,10 @@
     <Page Include="Resources\Style.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\PlatformListDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SearchPage.xaml">
       <SubType>Designer</SubType>
