@@ -1,4 +1,6 @@
-﻿using Prism.Commands;
+﻿
+using Masuit.Tools.Net;
+using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -66,6 +68,27 @@ namespace WeMusic.ViewModel
             if (SaveDirectory != DownloadManager.MusicDownloadPath)
             {
                 DownloadManager.MusicDownloadPath = SaveDirectory;
+            }
+            foreach (var item in Musics)
+            {
+                if (File.Exists(DownloadManager.MusicCachePath + item.Id + ".tmp"))
+                {
+                    try
+                    {
+                        File.Copy(DownloadManager.MusicCachePath + item.Id + ".tmp", $"{DownloadManager.MusicDownloadPath}{item.Name} - {item.Artists}.mp3");
+                        Toast.Show($"{item.Name} - {item.Artists}.mp3 下载成功",Toast.InfoType.Success);
+                    }
+                    catch
+                    {
+                        Toast.Show($"{item.Name} - {item.Artists}.mp3 下载失败", Toast.InfoType.Error);
+                    }
+                    
+                }
+                else
+                {
+                    DownloadManager.DownloadFileAsync((item as IApi).GetMusicUrl(), DownloadManager.MusicDownloadPath, $"{item.Name} - {item.Artists}.mp3", null,
+                        new Action<object, int>((o, i) => Toast.Show($"{item.Name} - {item.Artists}.mp3 下载成功", Toast.InfoType.Success)));
+                }
             }
         }
     }
