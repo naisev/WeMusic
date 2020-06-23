@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              Height="300"
              Width="600"
-             xmlns:vm="clr-namespace:WeMusic.ViewModel">
+             xmlns:vm="clr-namespace:WeMusic.ViewModel"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes">
     <UserControl.DataContext>
         <vm:DownloadDialogViewModel/>
     </UserControl.DataContext>
@@ -18,7 +19,12 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Border Height="36">
-            <TextBlock Text="下载窗口" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            <DockPanel>
+                <Button DockPanel.Dock="Right" Height="50" Width="50" Margin="0,-7,0,0" Style="{StaticResource WindowCloseButtonStyle}" 
+                         Command="{x:Static md:DialogHost.CloseDialogCommand}">
+                </Button>
+                <TextBlock Text="下载窗口" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </DockPanel>
         </Border>
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled">
             <Grid>

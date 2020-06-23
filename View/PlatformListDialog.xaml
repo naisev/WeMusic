@@ -12,7 +12,7 @@
     <UserControl.DataContext>
         <vm:PlatformListDialogViewModel/>
     </UserControl.DataContext>
-    <Grid Margin="4">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -24,12 +24,12 @@
                 <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}" IsChecked="{Binding ChoosePlatform}"
                          Margin="4" Content="导入账户歌单" />
             </StackPanel>
-            <Button DockPanel.Dock="Right" Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static md:DialogHost.CloseDialogCommand}">
-                <md:PackIcon Kind="CloseThick"></md:PackIcon>
+            <Button DockPanel.Dock="Right" Height="50" Width="50" Style="{StaticResource WindowCloseButtonStyle}" 
+                         Command="{x:Static md:DialogHost.CloseDialogCommand}">
             </Button>
         </DockPanel>
         
-        <md:Card Grid.Row="1" Margin="4">
+        <md:Card Grid.Row="1" Margin="8,0,8,8">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
