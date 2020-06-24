@@ -26,5 +26,9 @@ namespace WeMusic.Model.MusicModel
             CoverUrl = songlist.CoverUrl;
             Id = songlist.Id;
         }
+        public TencentList()
+        {
+
+        }
     }
 }
