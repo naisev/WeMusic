@@ -22,11 +22,6 @@
     <Page.DataContext>
         <vm:BasePageViewModel></vm:BasePageViewModel>
     </Page.DataContext>
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded" >
-            <i:InvokeCommandAction Command="{Binding DefaultListCommand}" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
     <Grid Grid.Row="1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>

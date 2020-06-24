@@ -181,6 +181,7 @@ namespace WeMusic.ViewModel
                     });
                     new MusicInfoManager().Insert(new MusicInfoModel(item));
                 }
+                ViewModelManager.BasePageViewModel.RefreshPlatformList();
                 Toast.Show("导入成功!", Toast.InfoType.Success);
             }
             

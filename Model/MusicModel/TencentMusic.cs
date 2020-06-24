@@ -54,11 +54,11 @@ namespace WeMusic.Model.MusicModel
         public string source { get; set; }
         public string SourceName { get { return "QQ音乐"; } }
         public MusicSource Origin { get { return MusicSource.Tencent; } }
-        public string CoverId { get => Id; set => Id = value; }
+        public string CoverId { get => albummid; set => albummid = value; }
 
         public string GetCoverUrl()
         {
-            return $"https://y.gtimg.cn/music/photo_new/T002R300x300M000{albummid}.jpg";
+            return $"https://y.gtimg.cn/music/photo_new/T002R300x300M000{CoverId}.jpg";
         }
 
         public string GetLyric()
@@ -83,6 +83,7 @@ namespace WeMusic.Model.MusicModel
             Name = music.Name;
             Album = music.Album;
             Artists = music.Artists;
+            CoverId = music.CoverId;
         }
 
         public TencentMusic() { }
