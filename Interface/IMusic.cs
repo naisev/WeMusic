@@ -10,6 +10,11 @@ namespace WeMusic.Interface
         string Id { get; set; }
 
         /// <summary>
+        /// 封面id，只有网易云需要，其他音乐默认为ID
+        /// </summary>
+        string CoverId { get; set; }
+
+        /// <summary>
         /// 用于正确产生接口产生的艺术家数组名称
         /// </summary>
         string Artists

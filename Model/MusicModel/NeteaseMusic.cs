@@ -51,6 +51,7 @@ namespace WeMusic.Model.MusicModel
         public string source { get; set; }
         public string SourceName { get { return "网易云"; } }
         public MusicSource Origin { get { return MusicSource.Netease; } }
+        public string CoverId { get => pic_id; set => pic_id = value; }
 
         public string GetCoverUrl()
         {
@@ -82,6 +83,7 @@ namespace WeMusic.Model.MusicModel
             Name = music.Name;
             Album = music.Album;
             Artists = music.Artists;
+            CoverId = music.CoverId;
         }
 
         public NeteaseMusic() { }

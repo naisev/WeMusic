@@ -54,6 +54,7 @@ namespace WeMusic.Model.MusicModel
         public string source { get; set; }
         public string SourceName { get { return "QQ音乐"; } }
         public MusicSource Origin { get { return MusicSource.Tencent; } }
+        public string CoverId { get => Id; set => Id = value; }
 
         public string GetCoverUrl()
         {

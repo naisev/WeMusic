@@ -16,6 +16,7 @@ namespace WeMusic.Model.DbModel
         [SugarColumn(IsIgnore = true)]
         public string SourceName { get; set; }
         public MusicSource Origin { get; set; }
+        public string CoverId { get; set; }
 
         public MusicInfoModel(IMusic music)
         {
@@ -25,6 +26,7 @@ namespace WeMusic.Model.DbModel
             Album = music.Album;
             SourceName = music.SourceName;
             Origin = music.Origin;
+            CoverId = music.CoverId;
         }
         public MusicInfoModel() { }
 

@@ -115,7 +115,8 @@ namespace WeMusic.Model
                             Id = info["id"].ToString(),
                             artist = artists.ToArray(),
                             Name = info["name"].ToString(),
-                            Album = info["al"]["name"].ToString()
+                            Album = info["al"]["name"].ToString(),
+                            CoverId = info["al"]["pic_str"].ToString()
                         });
                     }
                     result.Musics = musics.ToArray();

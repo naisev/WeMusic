@@ -54,6 +54,8 @@ namespace WeMusic.Model.MusicModel
         public string SourceName { get { return "酷狗音乐"; } }
         public MusicSource Origin { get { return MusicSource.Kugou; } }
 
+        public string CoverId { get => Id; set => Id = value; }
+
         public string GetCoverUrl()
         {
             try
