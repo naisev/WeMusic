@@ -52,7 +52,7 @@
                         </StackPanel>
                     </Expander.Header>
                 </Expander>
-                <Expander IsExpanded="True" Background="Transparent">
+                <Expander IsExpanded="True" Background="Transparent" Content="{Binding PlatformList}">
                     <Expander.Header>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="平台歌单" VerticalAlignment="Center" FontSize="16"></TextBlock>
@@ -62,14 +62,6 @@
                             </Button>
                         </StackPanel>
                     </Expander.Header>
-                    <StackPanel>
-                        <control:ImageRadioButton Content="歌单1" Style="{StaticResource MenuRadioButtom}" GroupName="MenuItem"/>
-                        <control:ImageRadioButton Content="歌单2" Style="{StaticResource MenuRadioButtom}" GroupName="MenuItem"/>
-                        <control:ImageRadioButton Content="歌单3" Style="{StaticResource MenuRadioButtom}" GroupName="MenuItem"/>
-                        <control:ImageRadioButton Content="歌单4" Style="{StaticResource MenuRadioButtom}" GroupName="MenuItem"/>
-                        <control:ImageRadioButton Content="歌单5" Style="{StaticResource MenuRadioButtom}" GroupName="MenuItem"/>
-                        <control:ImageRadioButton Content="歌单6" Style="{StaticResource MenuRadioButtom}" GroupName="MenuItem"/>
-                    </StackPanel>
                 </Expander>
             </StackPanel>
         </ScrollViewer>

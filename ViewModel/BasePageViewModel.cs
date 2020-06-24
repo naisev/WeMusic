@@ -14,6 +14,7 @@ using WeMusic.Control;
 using WeMusic.Interface;
 using WeMusic.Model;
 using WeMusic.Model.DbModel;
+using WeMusic.Model.MusicModel;
 using WeMusic.Model.Player;
 
 namespace WeMusic.ViewModel
@@ -29,6 +30,7 @@ namespace WeMusic.ViewModel
             ClickImportListCommand = new DelegateCommand(new Action(ClickImportListExecute));
             DefaultListExecute();
             RefreshCustomList();
+            RefreshPlatformList();
         }
 
         private ObservableCollection<IMusic> _musicInfos = new ObservableCollection<IMusic>();
@@ -41,6 +43,7 @@ namespace WeMusic.ViewModel
                 this.RaisePropertyChanged("MusicInfos");
             }
         }
+
         private StackPanel _customList = new StackPanel();
         public StackPanel CustomList
         {
@@ -49,6 +52,17 @@ namespace WeMusic.ViewModel
             {
                 _customList = value;
                 this.RaisePropertyChanged("CustomList");
+            }
+        }
+
+        private StackPanel _platformList;
+        public StackPanel PlatformList
+        {
+            get { return _platformList; }
+            set
+            {
+                _platformList = value;
+                this.RaisePropertyChanged("PlatformList");
             }
         }
 
@@ -120,6 +134,22 @@ namespace WeMusic.ViewModel
             });
         }
 
+        public void RefreshPlatformList()
+        {
+            PlatformList = new StackPanel();
+            var infos = new PlatformInfoManager().GetList();
+            infos.ForEach(item =>
+            {
+                ImageRadioButton btn = new ImageRadioButton();
+                btn.SetValue(ImageRadioButton.StyleProperty, Application.Current.Resources["MenuRadioButtom"]);
+                btn.GroupName = "MenuItem";
+                btn.Content = item.Title;
+                btn.Command = new DelegateCommand<object>(new Action<object>(ClickPlatformList));
+                btn.CommandParameter = item.Id;
+                PlatformList.Children.Add(btn);
+            });
+        }
+
         public void ClickCustomList(object parameter)
         {
             string title = parameter.ToString();
@@ -135,6 +165,25 @@ namespace WeMusic.ViewModel
                 }
             });
             PlayerList.SetPreList(MusicInfos, title);
+            DataGridAnimation();
+        }
+
+        public void ClickPlatformList(object parameter)
+        {
+            string id = parameter.ToString();
+            Console.WriteLine(id);
+            var ls = new PlatformListManager().GetList();
+            MusicInfos.Clear();
+            ls.ForEach(item =>
+            {
+                if (item.PlatformId == id)
+                {
+                    var mim = new MusicInfoManager();
+                    var music = mim.Find(item.MusicId);
+                    MusicInfos.Add(music.ToIMusic());
+                }
+            });
+            PlayerList.SetPreList(MusicInfos, new PlatformInfoManager().Find(id).Title);
             DataGridAnimation();
         }
 
