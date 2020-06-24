@@ -92,7 +92,6 @@ namespace WeMusic.Control
 
             //计算文字宽度
             double textWidth = MeasureTextWidth(content, 12, "微软雅黑");
-            Console.WriteLine(textWidth);
             if (textWidth >= 190)
             {
                 w.Width = textWidth + 60;

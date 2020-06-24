@@ -171,7 +171,6 @@ namespace WeMusic.ViewModel
         public void ClickPlatformList(object parameter)
         {
             string id = parameter.ToString();
-            Console.WriteLine(id);
             var ls = new PlatformListManager().GetList();
             MusicInfos.Clear();
             ls.ForEach(item =>

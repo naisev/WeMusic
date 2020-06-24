@@ -64,7 +64,6 @@ namespace WeMusic.ViewModel
 
         public void PrePlayExecute(object parameter)
         {
-            //Console.WriteLine(parameter.ToString());
             PlayerManager.Stop();
             if (!(parameter is IMusic) || !(parameter is IApi)) { return; }
 
