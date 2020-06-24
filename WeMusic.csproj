@@ -128,9 +128,13 @@
     <Compile Include="Interface\IMusic.cs" />
     <Compile Include="Interface\ISongList.cs" />
     <Compile Include="Model\CoreApi.cs" />
+    <Compile Include="Model\DbModel\PlatformListManager.cs" />
     <Compile Include="Model\DbModel\CustomListManager.cs" />
+    <Compile Include="Model\DbModel\PlatformListModel.cs" />
     <Compile Include="Model\DbModel\CustomListModel.cs" />
+    <Compile Include="Model\DbModel\PlatformInfoManager.cs" />
     <Compile Include="Model\DbModel\CustomTitleManager.cs" />
+    <Compile Include="Model\DbModel\PlatformInfoModel.cs" />
     <Compile Include="Model\DbModel\CustomTitleModel.cs" />
     <Compile Include="Model\DbModel\DbContext.cs" />
     <Compile Include="Model\DbModel\DefaultListManager.cs" />

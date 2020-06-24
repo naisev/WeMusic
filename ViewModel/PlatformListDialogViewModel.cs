@@ -172,6 +172,15 @@ namespace WeMusic.ViewModel
             else
             {
                 new PlatformInfoManager().Insert(new PlatformInfoModel(songList));
+                foreach (var item in songList.Musics)
+                {
+                    new PlatformListManager().Insert(new PlatformListModel
+                    {
+                        MusicId = item.Id,
+                        PlatformId = songList.Id
+                    });
+                    new MusicInfoManager().Insert(new MusicInfoModel(item));
+                }
                 Toast.Show("导入成功!", Toast.InfoType.Success);
             }
             
