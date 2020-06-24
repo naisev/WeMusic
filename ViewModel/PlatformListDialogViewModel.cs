@@ -11,6 +11,7 @@ using WeMusic.Control;
 using WeMusic.Enum;
 using WeMusic.Interface;
 using WeMusic.Model;
+using WeMusic.Model.DbModel;
 
 namespace WeMusic.ViewModel
 {
@@ -146,7 +147,7 @@ namespace WeMusic.ViewModel
             else if (ChooseNetease) { source = MusicSource.Netease; }
             else { source = MusicSource.Tencent; }
 
-            ISongList songList;
+            ISongList songList = null;
             bool isError = false;
             await Task.Run(() =>
             {
@@ -170,6 +171,7 @@ namespace WeMusic.ViewModel
             }
             else
             {
+                new PlatformInfoManager().Insert(new PlatformInfoModel(songList));
                 Toast.Show("导入成功!", Toast.InfoType.Success);
             }
             

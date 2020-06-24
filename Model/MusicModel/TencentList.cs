@@ -19,5 +19,12 @@ namespace WeMusic.Model.MusicModel
         public string Id { get => disstid; set => disstid = value; }
         public MusicSource Origin { get { return MusicSource.Tencent; } }
         public string SourceName { get { return "QQ音乐"; } }
+        public TencentList(ISongList songlist)
+        {
+            Title = songlist.Title;
+            Musics = songlist.Musics;
+            CoverUrl = songlist.CoverUrl;
+            Id = songlist.Id;
+        }
     }
 }

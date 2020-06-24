@@ -19,5 +19,12 @@ namespace WeMusic.Model.MusicModel
         public string Id { get => id; set => id = value; }
         public MusicSource Origin { get { return MusicSource.Kugou; } }
         public string SourceName { get { return "酷狗音乐"; } }
+        public KugouList(ISongList songlist)
+        {
+            Title = songlist.Title;
+            Musics = songlist.Musics;
+            CoverUrl = songlist.CoverUrl;
+            Id = songlist.Id;
+        }
     }
 }

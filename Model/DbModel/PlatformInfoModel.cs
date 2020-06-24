@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WeMusic.Enum;
 using WeMusic.Interface;
+using WeMusic.Model.MusicModel;
 
 namespace WeMusic.Model.DbModel
 {
@@ -30,6 +31,31 @@ namespace WeMusic.Model.DbModel
         public PlatformInfoModel()
         {
 
+        }
+
+        public PlatformInfoModel(ISongList songlist)
+        {
+            Id = songlist.Id;
+            Musics = songlist.Musics;
+            CoverUrl = songlist.CoverUrl;
+            Origin = songlist.Origin;
+            SourceName = songlist.SourceName;
+            Title = songlist.Title;
+        }
+
+        public ISongList ToSongList()
+        {
+            switch (Origin)
+            {
+                case MusicSource.Kugou:
+                    return new KugouList(this);
+                case MusicSource.Netease:
+                    return new NeteaseList(this);
+                case MusicSource.Tencent:
+                    return new TencentList(this);
+                default:
+                    return null;
+            }
         }
     }
 }

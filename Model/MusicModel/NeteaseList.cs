@@ -19,5 +19,12 @@ namespace WeMusic.Model.MusicModel
         public string Id { get => id; set => id = value; }
         public MusicSource Origin { get => MusicSource.Netease;  }
         public string SourceName { get => "网易云";  }
+        public NeteaseList(ISongList songlist)
+        {
+            Title = songlist.Title;
+            Musics = songlist.Musics;
+            CoverUrl = songlist.CoverUrl;
+            Id = songlist.Id;
+        }
     }
 }
