@@ -139,8 +139,7 @@ namespace WeMusic.ViewModel
         
         public async void ClickImportExecute()
         {
-            ImportButtonVisibility = Visibility.Hidden;
-            LoadingButtonVisibility = Visibility.Visible;
+            
             //获取类型
             MusicSource source;
             if (ChooseKugou) { source = MusicSource.Kugou; }
@@ -151,6 +150,9 @@ namespace WeMusic.ViewModel
             bool isError = false;
             await Task.Run(() =>
             {
+                Thread.Sleep(300);
+                ImportButtonVisibility = Visibility.Hidden;
+                LoadingButtonVisibility = Visibility.Visible;
                 try
                 {
                     songList = CoreApi.GetPlatformSongList(source, ImportUrl);
@@ -159,9 +161,6 @@ namespace WeMusic.ViewModel
                 {
                     isError = true;
                 }
-                Thread.Sleep(6000);
-
-                Console.WriteLine(LoadingButtonVisibility);
                 ImportButtonVisibility = Visibility.Visible;
                 LoadingButtonVisibility = Visibility.Hidden;
             });

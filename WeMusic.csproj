@@ -305,6 +305,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="README" />
     <None Include="Resources\InitData.db" />
   </ItemGroup>
   <ItemGroup>

@@ -27,7 +27,7 @@ namespace WeMusic.Control
             Error = 3
         }
 
-        public Toast(string content,InfoType showStyle)
+        public Toast(string content, InfoType showStyle)
         {
             InitializeComponent();
             Content.Content = content;
@@ -40,12 +40,12 @@ namespace WeMusic.Control
             DoubleAnimation daV = new DoubleAnimation(1, 0, new Duration(TimeSpan.FromSeconds(1)));
             this.BeginAnimation(OpacityProperty, daV);
         }
-        
+
         class StyleInfo
         {
             public Color BgColor { get; }
             public string PathStr { get; }
-            public StyleInfo(Color color,string pathStr)
+            public StyleInfo(Color color, string pathStr)
             {
                 BgColor = color;
                 PathStr = pathStr;
@@ -81,7 +81,6 @@ namespace WeMusic.Control
             //创建新窗口并Show
             Window w = new Window();
             w.Height = 50;
-            w.Width = 250;
             w.WindowStyle = WindowStyle.None;
             w.AllowsTransparency = true;
             w.Background = null;
@@ -91,6 +90,17 @@ namespace WeMusic.Control
             w.Top = top;
             w.Topmost = true;
 
+            //计算文字宽度
+            double textWidth = MeasureTextWidth(content, 12, "微软雅黑");
+            Console.WriteLine(textWidth);
+            if (textWidth >= 190)
+            {
+                w.Width = textWidth + 60;
+            }
+            else
+            {
+                w.Width = 250;
+            }
 
             System.Timers.Timer t = new System.Timers.Timer(showTime);
             t.Elapsed += new ElapsedEventHandler(delegate (object obj, ElapsedEventArgs e)
@@ -114,6 +124,17 @@ namespace WeMusic.Control
             t.Start();
             w.Show();
         }
-
+        public static double MeasureTextWidth(string text, double fontSize, string fontFamily)
+        {
+            FormattedText formattedText = new FormattedText(
+            text,
+            System.Globalization.CultureInfo.InvariantCulture,
+            FlowDirection.LeftToRight,
+            new Typeface(fontFamily.ToString()),
+            fontSize,
+            Brushes.Black
+            );
+            return formattedText.WidthIncludingTrailingWhitespace;
+        }
     }
 }

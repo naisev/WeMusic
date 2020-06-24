@@ -56,12 +56,7 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation Duration="0:0:.3" Storyboard.TargetProperty="Width" From="200" To="40"  DecelerationRatio="1"/>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoadingButton" Storyboard.TargetProperty="Visibility">
-                                            <DiscreteObjectKeyFrame KeyTime="0:0:.3" Value="{x:Static Visibility.Visible}"/>
-                                        </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
-                                            <DiscreteObjectKeyFrame KeyTime="0:0:.3" Value="{x:Static Visibility.Hidden}"/>
-                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimation Duration="0:0:0" Storyboard.TargetProperty="Width" From="40" To="200"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </EventTrigger.Actions>
