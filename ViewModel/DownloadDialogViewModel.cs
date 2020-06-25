@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using WeMusic.Control;
 using WeMusic.Interface;
 using WeMusic.Model;
+using WeMusic.Model.DbModel;
 
 namespace WeMusic.ViewModel
 {
@@ -76,6 +77,11 @@ namespace WeMusic.ViewModel
                     try
                     {
                         File.Copy(DownloadManager.MusicCachePath + item.Id + ".tmp", $"{DownloadManager.MusicDownloadPath}{item.Name} - {item.Artists}.mp3");
+                        new LocalListManager().Insert(new LocalListModel
+                        {
+                            Id = item.Id,
+                            FilePath = $"{DownloadManager.MusicDownloadPath}{item.Name} - {item.Artists}.mp3"
+                        });
                         Toast.Show($"{item.Name} - {item.Artists}.mp3 下载成功",Toast.InfoType.Success);
                     }
                     catch
@@ -87,7 +93,15 @@ namespace WeMusic.ViewModel
                 else
                 {
                     DownloadManager.DownloadFileAsync((item as IApi).GetMusicUrl(), DownloadManager.MusicDownloadPath, $"{item.Name} - {item.Artists}.mp3", null,
-                        new Action<object, int>((o, i) => Toast.Show($"{item.Name} - {item.Artists}.mp3 下载成功", Toast.InfoType.Success)));
+                        new Action<object, int>((o, i) => 
+                        {
+                            new LocalListManager().Insert(new LocalListModel
+                            {
+                                Id = item.Id,
+                                FilePath = $"{DownloadManager.MusicDownloadPath}{item.Name} - {item.Artists}.mp3"
+                            });
+                            Toast.Show($"{item.Name} - {item.Artists}.mp3 下载成功", Toast.InfoType.Success);
+                        }));
                 }
             }
         }

@@ -28,6 +28,7 @@ namespace WeMusic.ViewModel
             PrePlayCommand = new DelegateCommand<object>(new Action<object>(PrePlayExecute));
             AddListCommand = new DelegateCommand(new Action(AddListExecute));
             ClickImportListCommand = new DelegateCommand(new Action(ClickImportListExecute));
+            ClickLocalMusicCommand = new DelegateCommand(new Action(ClickLocalMusicExecute));
             DefaultListExecute();
             RefreshCustomList();
             RefreshPlatformList();
@@ -70,6 +71,7 @@ namespace WeMusic.ViewModel
         public DelegateCommand<object> PrePlayCommand { get; set; }
         public DelegateCommand AddListCommand { get; set; }
         public DelegateCommand ClickImportListCommand { get; set; }
+        public DelegateCommand ClickLocalMusicCommand { get; set; }
 
         public void DefaultListExecute()
         {
@@ -230,6 +232,20 @@ namespace WeMusic.ViewModel
         public async void ClickImportListExecute()
         {
             await DialogManager.ShowPlatformListDialog("");
+        }
+
+        public void ClickLocalMusicExecute()
+        {
+            MusicInfos.Clear();
+            var list = new LocalListManager().GetList();
+            list.ForEach(item =>
+            {
+                var mim = new MusicInfoManager();
+                var music = mim.Find(item.Id);
+                MusicInfos.Add(music.ToIMusic());
+            });
+            PlayerList.SetPreList(MusicInfos, "本地音乐");
+            DataGridAnimation();
         }
     }
 }

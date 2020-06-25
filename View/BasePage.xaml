@@ -33,7 +33,7 @@
                     
                     <StackPanel>
                         <control:ImageRadioButton Content="默认列表" Style="{StaticResource MenuRadioButtom}" IsChecked="True" GroupName="MenuItem" Command="{Binding DefaultListCommand}"/>
-                        <control:ImageRadioButton Content="本地音乐" Style="{StaticResource MenuRadioButtom}" GroupName="MenuItem"/>
+                        <control:ImageRadioButton Content="本地音乐" Style="{StaticResource MenuRadioButtom}" GroupName="MenuItem" Command="{Binding ClickLocalMusicCommand}"/>
                     </StackPanel>
                 </Expander>
                 <Expander IsExpanded="True" Background="Transparent" Content="{Binding CustomList}">

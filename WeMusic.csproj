@@ -151,6 +151,7 @@
     <Compile Include="Model\DbModel\LocalListModel.cs" />
     <Compile Include="Model\LyricItem.cs" />
     <Compile Include="Model\DbModel\MusicInfoModel.cs" />
+    <Compile Include="Model\MusicModel\LocalMusic.cs" />
     <Compile Include="Model\MusicModel\NeteaseList.cs" />
     <Compile Include="Model\MusicModel\NeteaseMusic.cs" />
     <Compile Include="Model\MusicModel\TencentList.cs" />
