@@ -41,7 +41,7 @@ namespace WeMusic.Model.DbModel
                 case MusicSource.Tencent:
                     return new TencentMusic(this);
                 default:
-                    return null;
+                    return new LocalMusic(this);
             }
         }
     }

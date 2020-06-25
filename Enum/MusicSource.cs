@@ -10,6 +10,7 @@ namespace WeMusic.Enum
     {
         Netease,
         Kugou,
-        Tencent
+        Tencent,
+        Local
     }
 }
