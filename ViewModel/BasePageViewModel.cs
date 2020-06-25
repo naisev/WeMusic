@@ -29,6 +29,9 @@ namespace WeMusic.ViewModel
             AddListCommand = new DelegateCommand(new Action(AddListExecute));
             ClickImportListCommand = new DelegateCommand(new Action(ClickImportListExecute));
             ClickLocalMusicCommand = new DelegateCommand(new Action(ClickLocalMusicExecute));
+            ClickPlayAllCommand = new DelegateCommand(new Action(ClickPlayAllExecute));
+            ClickDownloadAllCommand = new DelegateCommand(new Action(ClickDownloadAllExecute));
+            OpenPopupCommand = new DelegateCommand(new Action(OpenPopupExecute));
             DefaultListExecute();
             RefreshCustomList();
             RefreshPlatformList();
@@ -42,6 +45,17 @@ namespace WeMusic.ViewModel
             {
                 _musicInfos = value;
                 this.RaisePropertyChanged("MusicInfos");
+            }
+        }
+
+        private ObservableCollection<object> _menus;
+        public ObservableCollection<object> Menus
+        {
+            get { return _menus; }
+            set
+            {
+                _menus = value;
+                this.RaisePropertyChanged("Menus");
             }
         }
 
@@ -72,6 +86,10 @@ namespace WeMusic.ViewModel
         public DelegateCommand AddListCommand { get; set; }
         public DelegateCommand ClickImportListCommand { get; set; }
         public DelegateCommand ClickLocalMusicCommand { get; set; }
+        public DelegateCommand ClickPlayAllCommand { get; set; }
+        public DelegateCommand ClickDownloadAllCommand { get; set; }
+        public DelegateCommand ClickAddToCommand { get; set; }
+        public DelegateCommand OpenPopupCommand { get; set; }
 
         public void DefaultListExecute()
         {
@@ -246,6 +264,76 @@ namespace WeMusic.ViewModel
             });
             PlayerList.SetPreList(MusicInfos, "本地音乐");
             DataGridAnimation();
+        }
+
+        public void ClickPlayAllExecute()
+        {
+            if(MusicInfos is null || MusicInfos.Count <= 0) { return; }
+            PrePlayExecute(MusicInfos[0]);
+        }
+
+        public async void ClickDownloadAllExecute()
+        {
+            await DialogManager.ShowDownloadDialog(MusicInfos);
+        }
+
+        public void AddToCustomList(object parameter)
+        {
+            if (parameter.ToString() == PlayerList.PreListTitle) { Toast.Show("添加失败！歌单相同！", Toast.InfoType.Error); return; }
+
+            if (MusicInfos is null) { return; }
+            //将音乐加入到自定义列表数据库
+            var orm = new CustomListManager();
+            var mim = new MusicInfoManager();
+            foreach (var item in MusicInfos)
+            {
+                orm.Insert(new CustomListModel(parameter.ToString(), item.Id));
+                mim.Insert(new MusicInfoModel(item));
+            }
+            ViewModelManager.BasePageViewModel.RefreshShowList(parameter.ToString());
+            Toast.Show("添加成功！", Toast.InfoType.Success);
+        }
+
+        public void AddToDefaultList()
+        {
+            if ("默认列表" == PlayerList.PreListTitle) { Toast.Show("添加失败！歌单相同！", Toast.InfoType.Error); return; }
+
+            if (MusicInfos is null) { return; }
+            //在默认列表数据库中加入音乐
+            var dlm = new DefaultListManager();
+            var mim = new MusicInfoManager();
+            foreach (var item in MusicInfos)
+            {
+                dlm.Insert(new DefaultListModel( item.Id));
+                mim.Insert(new MusicInfoModel(item));
+            }
+
+            //如果当前BasePage的DataGrid展示的是默认列表，进行刷新
+            ViewModelManager.BasePageViewModel.RefreshShowList("默认列表");
+            Toast.Show("添加成功！", Toast.InfoType.Success);
+        }
+
+        public void OpenPopupExecute()
+        {
+            Console.WriteLine("test");
+            Menus = new ObservableCollection<object>();
+            Menus.Add(new MenuItem
+            {
+                Header = "默认列表",
+                Command = new DelegateCommand(new Action(AddToDefaultList))
+            });
+            Menus.Add(new Separator());
+
+            var titles = new CustomTitleManager().GetList();
+            titles.ForEach(item =>
+            {
+                Menus.Add(new MenuItem
+                {
+                    Header = item.Title,
+                    Command = new DelegateCommand<object>(new Action<object>(AddToCustomList)),
+                    CommandParameter = item.Title
+                });
+            });
         }
     }
 }

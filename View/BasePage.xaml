@@ -67,7 +67,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Margin="10">
-                <Button Height="40" Width="120" md:ButtonAssist.CornerRadius="20" Style="{StaticResource MaterialDesignFlatLightBgButton}" BorderBrush="{x:Null}">
+                <Button Height="40" Width="120" md:ButtonAssist.CornerRadius="20" BorderBrush="{x:Null}"
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}" Command="{Binding ClickPlayAllCommand}">
                     <Button.Background>
                         <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
                             <GradientStop Offset="0" Color="#4facfe"/>
@@ -79,7 +80,8 @@
                         <TextBlock Text="播放全部" VerticalAlignment="Center" Foreground="White"/>
                     </StackPanel>
                 </Button>
-                <Button Height="40" Width="120" md:ButtonAssist.CornerRadius="20" Style="{StaticResource MaterialDesignFlatLightBgButton}" BorderBrush="{x:Null}" Margin="20,0,0,0">
+                <Button Height="40" Width="120" md:ButtonAssist.CornerRadius="20"  BorderBrush="{x:Null}" Margin="20,0,0,0"
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}" Command="{Binding ClickDownloadAllCommand}">
                     <Button.Background>
                         <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
                             <GradientStop Offset="0" Color="#4facfe"/>
@@ -91,17 +93,37 @@
                         <TextBlock Text="下载全部" VerticalAlignment="Center" Foreground="White"/>
                     </StackPanel>
                 </Button>
-                <Button Height="40" Width="120" md:ButtonAssist.CornerRadius="20" Style="{StaticResource MaterialDesignFlatLightBgButton}" BorderBrush="{x:Null}" Margin="20,0,0,0">
+                <Button Height="40" Width="120" md:ButtonAssist.CornerRadius="20"
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}" BorderBrush="{x:Null}" Margin="20,0,0,0" >
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding OpenPopupCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <Button.Background>
                         <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
                             <GradientStop Offset="0" Color="#4facfe"/>
                             <GradientStop Offset="1" Color="#00f2fe"/>
                         </LinearGradientBrush>
                     </Button.Background>
-                    <StackPanel Orientation="Horizontal">
-                        <md:PackIcon Kind="PlusBoxOutline" Height="25" Width="25" Foreground="White"/>
-                        <TextBlock Text="添加到" VerticalAlignment="Center" Foreground="White"/>
-                    </StackPanel>
+                    <Grid Width="120" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <md:PackIcon Kind="PlusBoxOutline" Height="25" Width="25" Foreground="White" VerticalAlignment="Center"/>
+                            <TextBlock Text="添加到" VerticalAlignment="Center" Foreground="White"/>
+                        </StackPanel>
+                        <md:PopupBox Width="120" Height="40" PopupMode="Click"  PlacementMode="BottomAndAlignCentres" Opacity="0">
+                            <md:PopupBox.PopupContent>
+                                <Menu ItemsSource="{Binding Menus}">
+                                    <Menu.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Vertical"/>
+                                        </ItemsPanelTemplate>
+                                    </Menu.ItemsPanel>
+                                </Menu>
+                            </md:PopupBox.PopupContent>
+                        </md:PopupBox>
+                    </Grid>
+
                 </Button>
             </StackPanel>
             <DataGrid Grid.Row="1" AutoGenerateColumns="False" x:Name="dgv" Background="Transparent" CanUserReorderColumns="False"
