@@ -30,7 +30,7 @@
         <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
             <StackPanel>
                 <Expander Header="我的音乐" IsExpanded="True" Background="Transparent">
-                    
+
                     <StackPanel>
                         <control:ImageRadioButton Content="默认列表" Style="{StaticResource MenuRadioButtom}" IsChecked="True" GroupName="MenuItem" Command="{Binding DefaultListCommand}"/>
                         <control:ImageRadioButton Content="本地音乐" Style="{StaticResource MenuRadioButtom}" GroupName="MenuItem" Command="{Binding ClickLocalMusicCommand}"/>
@@ -61,27 +61,72 @@
             </StackPanel>
         </ScrollViewer>
 
-        <DataGrid Grid.Column="1" AutoGenerateColumns="False" x:Name="dgv" Background="Transparent" CanUserReorderColumns="False"
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <Button Height="40" Width="120" md:ButtonAssist.CornerRadius="20" Style="{StaticResource MaterialDesignFlatLightBgButton}" BorderBrush="{x:Null}">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                            <GradientStop Offset="0" Color="#4facfe"/>
+                            <GradientStop Offset="1" Color="#00f2fe"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <StackPanel Orientation="Horizontal">
+                        <md:PackIcon Kind="PlayOutline" Height="30" Width="30" Foreground="White"/>
+                        <TextBlock Text="播放全部" VerticalAlignment="Center" Foreground="White"/>
+                    </StackPanel>
+                </Button>
+                <Button Height="40" Width="120" md:ButtonAssist.CornerRadius="20" Style="{StaticResource MaterialDesignFlatLightBgButton}" BorderBrush="{x:Null}" Margin="20,0,0,0">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                            <GradientStop Offset="0" Color="#4facfe"/>
+                            <GradientStop Offset="1" Color="#00f2fe"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <StackPanel Orientation="Horizontal">
+                        <md:PackIcon Kind="Download" Height="25" Width="25" Foreground="White"/>
+                        <TextBlock Text="下载全部" VerticalAlignment="Center" Foreground="White"/>
+                    </StackPanel>
+                </Button>
+                <Button Height="40" Width="120" md:ButtonAssist.CornerRadius="20" Style="{StaticResource MaterialDesignFlatLightBgButton}" BorderBrush="{x:Null}" Margin="20,0,0,0">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                            <GradientStop Offset="0" Color="#4facfe"/>
+                            <GradientStop Offset="1" Color="#00f2fe"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <StackPanel Orientation="Horizontal">
+                        <md:PackIcon Kind="PlusBoxOutline" Height="25" Width="25" Foreground="White"/>
+                        <TextBlock Text="添加到" VerticalAlignment="Center" Foreground="White"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <DataGrid Grid.Row="1" AutoGenerateColumns="False" x:Name="dgv" Background="Transparent" CanUserReorderColumns="False"
                   ItemsSource="{Binding MusicInfos}" CanUserAddRows="False" CanUserSortColumns="False" IsReadOnly="True">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseDoubleClick" >
-                    <i:InvokeCommandAction Command="{Binding PrePlayCommand}" 
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick" >
+                        <i:InvokeCommandAction Command="{Binding PrePlayCommand}" 
                                            CommandParameter="{Binding SelectedItem,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="歌曲名" Width="4*" Binding="{Binding Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="歌手" Width="2*" Binding="{Binding Artists}"></DataGridTextColumn>
-                <DataGridTextColumn Header="专辑" Width="2*" Binding="{Binding Album}"></DataGridTextColumn>
-                <DataGridTextColumn Header="来源" Width="1*" Binding="{Binding SourceName}"></DataGridTextColumn>
-                <DataGridTemplateColumn Width="120" Header="操作">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <control:ListOperate x:Name="lstOp"></control:ListOperate>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="歌曲名" Width="4*" Binding="{Binding Name}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="歌手" Width="2*" Binding="{Binding Artists}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="专辑" Width="2*" Binding="{Binding Album}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="来源" Width="1*" Binding="{Binding SourceName}"></DataGridTextColumn>
+                    <DataGridTemplateColumn Width="120" Header="操作">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <control:ListOperate x:Name="lstOp"></control:ListOperate>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        
     </Grid>
 </Page>
