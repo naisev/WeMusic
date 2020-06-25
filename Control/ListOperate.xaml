@@ -69,6 +69,9 @@
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Button Height="25" Width="25" Style="{StaticResource MaterialDesignIconButton}">
                                     <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                            <i:InvokeCommandAction Command="{Binding OpenPopupCommand}"/>
+                                        </i:EventTrigger>
                                         <i:EventTrigger EventName="PreviewMouseUp">
                                             <i:InvokeCommandAction Command="{Binding DataContext.PreMenuCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
                                                                    CommandParameter="{Binding SelectedItem,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid,AncestorLevel=1}}"/>

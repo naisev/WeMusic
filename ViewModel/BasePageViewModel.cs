@@ -315,7 +315,6 @@ namespace WeMusic.ViewModel
 
         public void OpenPopupExecute()
         {
-            Console.WriteLine("test");
             Menus = new ObservableCollection<object>();
             Menus.Add(new MenuItem
             {

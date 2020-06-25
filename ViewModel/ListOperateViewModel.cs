@@ -24,24 +24,7 @@ namespace WeMusic.ViewModel
             PrePlayCommand = new DelegateCommand<object>(new Action<object>(PrePlayExecute));
             PreMenuCommand = new DelegateCommand<object>(new Action<object>(PreMenuExecute));
             DownloadCommand = new DelegateCommand<object>(new Action<object>(DownloadExecute));
-            Menus = new ObservableCollection<object>();
-
-            Menus.Add(new MenuItem
-            {
-                Header = "默认列表",
-                Command = new DelegateCommand(new Action(AddToDefaultList))
-            });
-            Menus.Add(new Separator());
-            var titles = new CustomTitleManager().GetList();
-            titles.ForEach(item =>
-            {
-                Menus.Add(new MenuItem
-                {
-                    Header = item.Title,
-                    Command = new DelegateCommand<object>(new Action<object>(AddToCustomList)),
-                    CommandParameter = item.Title
-                });
-            });
+            OpenPopupCommand = new DelegateCommand(new Action(OpenPopupExecute));
         }
 
         private ObservableCollection<object> _menus;
@@ -61,6 +44,7 @@ namespace WeMusic.ViewModel
         public DelegateCommand<object> PrePlayCommand { get; set; }
         public DelegateCommand<object> PreMenuCommand { get; set; }
         public DelegateCommand<object> DownloadCommand { get; set; }
+        public DelegateCommand OpenPopupCommand { get; set; }
 
         public void PrePlayExecute(object parameter)
         {
@@ -81,8 +65,9 @@ namespace WeMusic.ViewModel
 
         public void AddToDefaultList()
         {
+            if ("默认列表" == PlayerList.PreListTitle) { Toast.Show("添加失败！歌单相同！", Toast.InfoType.Error); return; }
             if (menuParameter is null) { return; }
-            //在默认列表数据库中加入一月
+            //在默认列表数据库中加入音乐
             var dlm = new DefaultListManager();
             dlm.Insert(new DefaultListModel((menuParameter as IMusic).Id));
             var mim = new MusicInfoManager();
@@ -100,6 +85,7 @@ namespace WeMusic.ViewModel
 
         public void AddToCustomList(object parameter)
         {
+            if (parameter.ToString() == PlayerList.PreListTitle) { Toast.Show("添加失败！歌单相同！", Toast.InfoType.Error); return; }
             if (menuParameter is null) { return; }
             //将音乐加入到自定义列表数据库
             var orm = new CustomListManager();
@@ -113,6 +99,28 @@ namespace WeMusic.ViewModel
         public async void DownloadExecute(object parameter)
         {
             await DialogManager.ShowDownloadDialog(parameter);
+        }
+
+        public void OpenPopupExecute()
+        {
+            Menus = new ObservableCollection<object>();
+
+            Menus.Add(new MenuItem
+            {
+                Header = "默认列表",
+                Command = new DelegateCommand(new Action(AddToDefaultList))
+            });
+            Menus.Add(new Separator());
+            var titles = new CustomTitleManager().GetList();
+            titles.ForEach(item =>
+            {
+                Menus.Add(new MenuItem
+                {
+                    Header = item.Title,
+                    Command = new DelegateCommand<object>(new Action<object>(AddToCustomList)),
+                    CommandParameter = item.Title
+                });
+            });
         }
     }
 }
