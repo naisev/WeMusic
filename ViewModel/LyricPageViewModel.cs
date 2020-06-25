@@ -142,11 +142,19 @@ namespace WeMusic.ViewModel
 
         private void TimeTick(object sender, EventArgs e)
         {
-            //歌曲结束，歌词滚动停止
-            if (PlayerManager.State == NAudio.Wave.PlaybackState.Stopped) { timer.Stop(); return; }
-            if (CurrentIndex < 0 || CurrentIndex >= lyrics.Count - 1) { timer.Stop(); return; }
+            //歌曲暂停或结束，歌词滚动停止
+            if (PlayerManager.State != NAudio.Wave.PlaybackState.Playing) { timer.Stop(); return; }
 
             int seconds = (int)PlayerManager.Position.TotalSeconds;
+            if (CurrentIndex < 0) { return; }
+            if (CurrentIndex >= lyrics.Count - 1) 
+            {
+                //当前为最后一句歌词，直接返回，若歌词进度被改变，继续歌词滚动事件
+                if (seconds>=lyrics[CurrentIndex].Time  ) { return; }
+                CurrentIndex--;
+            }
+
+            
             //当前歌词无需滚动
             if (seconds > lyrics[CurrentIndex].Time && seconds < lyrics[CurrentIndex + 1].Time) { return; }
 

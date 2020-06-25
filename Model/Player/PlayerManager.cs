@@ -201,6 +201,7 @@ namespace WeMusic.Model.Player
                         if (PageManager.CurrentPage == PageManager.LyricPage)
                         {
                             ViewModelManager.MainWindowViewModel.SetBackground(1);
+                            ViewModelManager.LyricPageViewModel.Cover = new Uri($"pack://siteoforigin:,,,/Cache/Cover/{PlayMusic.Id}.jpg", UriKind.Absolute);
                         }
                         ViewModelManager.MainWindowViewModel.CoverSource = new Uri($"pack://siteoforigin:,,,/Cache/Cover/{PlayMusic.Id}.jpg", UriKind.Absolute);
                     }));
