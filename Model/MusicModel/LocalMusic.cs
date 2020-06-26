@@ -29,7 +29,7 @@ namespace WeMusic.Model.MusicModel
 
         public string GetLyric()
         {
-            return string.Empty;
+            return "本地音乐暂无歌词";
         }
 
         public string GetMusicUrl()

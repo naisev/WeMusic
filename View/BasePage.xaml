@@ -10,12 +10,16 @@
       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       xmlns:vm="clr-namespace:WeMusic.ViewModel"
       xmlns:control="clr-namespace:WeMusic.Control"
-      xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes">
+      xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:converter="clr-namespace:WeMusic.Converter">
 
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Control/DataGrid.xaml" />
+                <ResourceDictionary>
+                    <converter:VisibilityConverter x:Key="VisibilityConverter"/>
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
@@ -33,7 +37,7 @@
 
                     <StackPanel>
                         <control:ImageRadioButton Content="默认列表" Style="{StaticResource MenuRadioButtom}" IsChecked="True" GroupName="MenuItem" Command="{Binding DefaultListCommand}"/>
-                        <control:ImageRadioButton Content="本地音乐" Style="{StaticResource MenuRadioButtom}" GroupName="MenuItem" Command="{Binding ClickLocalMusicCommand}"/>
+                        <control:ImageRadioButton Content="本地音乐" Style="{StaticResource MenuRadioButtom}" GroupName="MenuItem" Command="{Binding ClickLocalMusicCommand}" x:Name="RadioLocal"/>
                     </StackPanel>
                 </Expander>
                 <Expander IsExpanded="True" Background="Transparent" Content="{Binding CustomList}">
@@ -124,6 +128,19 @@
                         </md:PopupBox>
                     </Grid>
 
+                </Button>
+                <Button Height="40" Width="120" md:ButtonAssist.CornerRadius="20"  BorderBrush="{x:Null}" Margin="20,0,0,0" x:Name="BtnAddLocal"
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}" Command="{Binding ClickImportLocalCommand}"
+                        Visibility="{Binding ElementName=RadioLocal,Path=IsChecked,Converter={StaticResource VisibilityConverter}}">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                            <GradientStop Offset="0" Color="#4facfe"/>
+                            <GradientStop Offset="1" Color="#00f2fe"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="添加本地音乐" VerticalAlignment="Center" Foreground="White"/>
+                    </StackPanel>
                 </Button>
             </StackPanel>
             <DataGrid Grid.Row="1" AutoGenerateColumns="False" x:Name="dgv" Background="Transparent" CanUserReorderColumns="False"

@@ -32,6 +32,7 @@ namespace WeMusic.ViewModel
             ClickPlayAllCommand = new DelegateCommand(new Action(ClickPlayAllExecute));
             ClickDownloadAllCommand = new DelegateCommand(new Action(ClickDownloadAllExecute));
             OpenPopupCommand = new DelegateCommand(new Action(OpenPopupExecute));
+            ClickImportLocalCommand = new DelegateCommand(new Action(ClickImportLocalExecute));
             DefaultListExecute();
             RefreshCustomList();
             RefreshPlatformList();
@@ -90,6 +91,7 @@ namespace WeMusic.ViewModel
         public DelegateCommand ClickDownloadAllCommand { get; set; }
         public DelegateCommand ClickAddToCommand { get; set; }
         public DelegateCommand OpenPopupCommand { get; set; }
+        public DelegateCommand ClickImportLocalCommand { get; set; }
 
         public void DefaultListExecute()
         {
@@ -249,7 +251,7 @@ namespace WeMusic.ViewModel
 
         public async void ClickImportListExecute()
         {
-            await DialogManager.ShowPlatformListDialog("");
+            await DialogManager.ShowPlatformListDialog();
         }
 
         public void ClickLocalMusicExecute()
@@ -333,6 +335,11 @@ namespace WeMusic.ViewModel
                     CommandParameter = item.Title
                 });
             });
+        }
+
+        public async void ClickImportLocalExecute()
+        {
+            await DialogManager.ShowImportLocalDialog();
         }
     }
 }

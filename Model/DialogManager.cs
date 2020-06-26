@@ -20,9 +20,14 @@ namespace WeMusic.Model
             return await DialogHost.Show(new DownloadDialog(parameter));
         }
 
-        public async static Task<object> ShowPlatformListDialog(object parameter)
+        public async static Task<object> ShowPlatformListDialog()
         {
             return await DialogHost.Show(new PlatformListDialog());
+        }
+
+        public async static Task<object> ShowImportLocalDialog()
+        {
+            return await DialogHost.Show(new ImportLocalDialog());
         }
     }
 }

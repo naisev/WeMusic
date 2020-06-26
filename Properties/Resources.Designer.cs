@@ -61,12 +61,12 @@ namespace WeMusic.Properties {
         }
         
         /// <summary>
-        ///   查找 System.Byte[] 类型的本地化资源。
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        public static byte[] InitData {
+        public static System.Drawing.Bitmap DefaultCover {
             get {
-                object obj = ResourceManager.GetObject("InitData", resourceCulture);
-                return ((byte[])(obj));
+                object obj = ResourceManager.GetObject("DefaultCover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

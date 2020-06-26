@@ -87,7 +87,7 @@ namespace WeMusic.Model.Player
             //当前进度设置
             PlayerNotification.Start();
 
-            if (!File.Exists(DownloadManager.MusicCachePath + PlayMusic.Id + ".tmp"))
+            if (!File.Exists(DownloadManager.MusicCachePath + PlayMusic.Id + ".tmp") && PlayMusic.Origin != Enum.MusicSource.Local)
             {
                 DownloadManager.DownloadFileAsync(Source, DownloadManager.MusicCachePath, PlayMusic.Id + ".tmp");
             }
@@ -192,6 +192,17 @@ namespace WeMusic.Model.Player
             }
 
             //专辑封面缓存检测
+            if (PlayMusic.Origin == Enum.MusicSource.Local)
+            {
+                try
+                {
+                    Properties.Resources.DefaultCover.Save(DownloadManager.CoverCachePath + PlayMusic.Id + ".jpg");
+                }
+                catch
+                {
+                    //忽略
+                }
+            }
             if (!File.Exists(DownloadManager.CoverCachePath + PlayMusic.Id + ".jpg"))
             {
                 //异步下载图片
@@ -214,6 +225,7 @@ namespace WeMusic.Model.Player
                 }
                 ViewModelManager.MainWindowViewModel.CoverSource = new Uri($"pack://siteoforigin:,,,/Cache/Cover/{PlayMusic.Id}.jpg", UriKind.Absolute);
             }
+
 
             //如果当前页面是歌词页面，重新加载歌词页面
             if (PageManager.CurrentPage == PageManager.LyricPage)
