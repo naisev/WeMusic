@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="WeMusic.View.ImportLocalDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WeMusic.View"
+             mc:Ignorable="d" 
+             Height="200" Width="300"
+             d:DesignHeight="200" d:DesignWidth="400"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:vm="clr-namespace:WeMusic.ViewModel">
+    <UserControl.DataContext>
+        <vm:ImportLocalDialogViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Button Height="50" Width="50" HorizontalAlignment="Right" VerticalAlignment="Top"
+                Style="{StaticResource WindowCloseButtonStyle}" Command="{x:Static md:DialogHost.CloseDialogCommand}"/>
+
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+            <Button Height="40" Width="200" md:ButtonAssist.CornerRadius="20" BorderBrush="{x:Null}" Content="选择本地音乐" Foreground="White"
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}" Command="{Binding ClickChooseMusicCommand}" Margin="20">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <GradientStop Offset="0" Color="#4facfe"/>
+                        <GradientStop Offset="1" Color="#00f2fe"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button Height="40" Width="200" md:ButtonAssist.CornerRadius="20" BorderBrush="{x:Null}" Content="扫描本地音乐文件夹" Foreground="White"
+                        Style="{StaticResource MaterialDesignFlatLightBgButton}" Command="{Binding ClickScanFolderCommand}" Margin="20">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <GradientStop Offset="0" Color="#4facfe"/>
+                        <GradientStop Offset="1" Color="#00f2fe"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
