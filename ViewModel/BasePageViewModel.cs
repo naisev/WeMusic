@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms.VisualStyles;
+using System.Windows.Input;
 using System.Windows.Media.Animation;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -21,6 +22,19 @@ namespace WeMusic.ViewModel
 {
     public class BasePageViewModel : BindableBase
     {
+        private class TagInfo
+        {
+            /// <summary>
+            /// 0：自定义歌单，1：平台歌单
+            /// </summary>
+            public int Kind { get; set; }
+            public string Value { get; set; }
+            public TagInfo(int kind,string value)
+            {
+                Kind = kind;
+                Value = value;
+            }
+        }
         public BasePageViewModel()
         {
             ViewModelManager.BasePageViewModel = this;
@@ -153,10 +167,42 @@ namespace WeMusic.ViewModel
                 btn.SetValue(ImageRadioButton.StyleProperty, Application.Current.Resources["MenuRadioButtom"]);
                 btn.GroupName = "MenuItem";
                 btn.Content = item.Title;
+                var menu = new ContextMenu();
+                var title = new TextBlock { Text = "删除歌单" };
+                title.MouseLeftButtonUp += ClickDeleteList;
+                title.Tag = new TagInfo(0, item.Title);
+                menu.Items.Add(title);
+                btn.ContextMenu = menu;
                 btn.Command = new DelegateCommand<object>(new Action<object>(ClickCustomList));
                 btn.CommandParameter = item.Title;
                 CustomList.Children.Add(btn);
             });
+        }
+
+        private void ClickDeleteList(object sender, MouseButtonEventArgs e)
+        {
+            TagInfo tag = (sender as TextBlock).Tag as TagInfo;
+            if (tag.Kind == 0)
+            {
+                new CustomListManager().CurrentDb.Delete(o => o.Title == tag.Value);
+                new CustomTitleManager().Delete(tag.Value);
+                RefreshCustomList();
+                if (PlayerList.PreListTitle == tag.Value)
+                {
+                    DefaultListExecute();
+                }
+            }
+            else
+            {
+                new PlatformInfoManager().Delete(tag.Value);
+                new PlatformListManager().CurrentDb.Delete(o => o.PlatformId == tag.Value);
+                RefreshPlatformList();
+                if (ListId == tag.Value)
+                {
+                    DefaultListExecute();
+                }
+            }
+            Toast.Show("删除歌单成功！", Toast.InfoType.Success);
         }
 
         public void RefreshPlatformList()
@@ -169,6 +215,12 @@ namespace WeMusic.ViewModel
                 btn.SetValue(ImageRadioButton.StyleProperty, Application.Current.Resources["MenuRadioButtom"]);
                 btn.GroupName = "MenuItem";
                 btn.Content = item.Title;
+                var menu = new ContextMenu();
+                var title = new TextBlock { Text = "删除歌单" };
+                title.MouseLeftButtonUp += ClickDeleteList;
+                title.Tag = new TagInfo(1, item.Id);
+                menu.Items.Add(title);
+                btn.ContextMenu = menu;
                 btn.Command = new DelegateCommand<object>(new Action<object>(ClickPlatformList));
                 btn.CommandParameter = item.Id;
                 PlatformList.Children.Add(btn);
