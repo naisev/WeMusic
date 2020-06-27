@@ -25,6 +25,7 @@ namespace WeMusic.ViewModel
             PreMenuCommand = new DelegateCommand<object>(new Action<object>(PreMenuExecute));
             DownloadCommand = new DelegateCommand<object>(new Action<object>(DownloadExecute));
             OpenPopupCommand = new DelegateCommand(new Action(OpenPopupExecute));
+            DeleteCommand = new DelegateCommand<object>(new Action<object>(DeleteExecute));
         }
 
         private ObservableCollection<object> _menus;
@@ -45,6 +46,7 @@ namespace WeMusic.ViewModel
         public DelegateCommand<object> PreMenuCommand { get; set; }
         public DelegateCommand<object> DownloadCommand { get; set; }
         public DelegateCommand OpenPopupCommand { get; set; }
+        public DelegateCommand<object> DeleteCommand { get; set; }
 
         public void PrePlayExecute(object parameter)
         {
@@ -121,6 +123,49 @@ namespace WeMusic.ViewModel
                     CommandParameter = item.Title
                 });
             });
+        }
+
+        public void DeleteExecute(object parameter)
+        {
+            //获取音乐id
+            if (parameter is null) { return; }
+            if (!(menuParameter is IMusic)) { return; }
+            var music = menuParameter as IMusic;
+
+            //检查是否搜索页面
+            if (PageManager.CurrentPage == PageManager.SearchPage)
+            {
+                ViewModelManager.SearchPageViewModel.MusicInfos.Remove(music);
+            }
+            else
+            {
+                //检查是否平台音乐
+                if (ViewModelManager.BasePageViewModel.ListId == string.Empty)
+                {
+                    switch (PlayerList.PreListTitle)
+                    {
+                        case "默认列表":
+                            new DefaultListManager().Delete(music.Id);
+                            ViewModelManager.BasePageViewModel.RefreshShowList("默认列表");
+                            break;
+                        case "本地音乐":
+                            new LocalListManager().Delete(music.Id);
+                            ViewModelManager.BasePageViewModel.RefreshShowList("本地音乐");
+                            break;
+                        default:
+                            new CustomListManager().CurrentDb.Delete((o) => o.Title == PlayerList.PreListTitle && o.Id == music.Id);
+                            ViewModelManager.BasePageViewModel.RefreshShowList(PlayerList.PreListTitle);
+                            break;
+                    }
+                }
+                else
+                {
+                    new PlatformListManager().CurrentDb.Delete((o) => o.PlatformId == ViewModelManager.BasePageViewModel.ListId && o.MusicId == music.Id);
+                    ViewModelManager.BasePageViewModel.RefreshShowList(PlayerList.PreListTitle);
+                }
+            }
+
+            Toast.Show("移除成功！", Toast.InfoType.Success);
         }
     }
 }

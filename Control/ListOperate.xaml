@@ -89,7 +89,8 @@
                                                     </Menu.ItemsPanel>
                                                     <MenuItem Header="播放" Command="{Binding DataContext.PrePlayCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
                                         CommandParameter="{Binding SelectedItem,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid,AncestorLevel=1}}"/>
-                                                    <MenuItem Header="下一首播放"/>
+                                                    <MenuItem Header="移除" Command="{Binding DataContext.DeleteCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+                                        CommandParameter="{Binding SelectedItem,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid,AncestorLevel=1}}"/>
                                                     <MenuItem Header="下载"/>
                                                     <Separator />
                                                     <MenuItem Header="添加到" ItemsSource="{Binding Menus}">

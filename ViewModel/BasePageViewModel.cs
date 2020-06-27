@@ -82,6 +82,8 @@ namespace WeMusic.ViewModel
             }
         }
 
+        public string ListId { get; set; }
+
         public DelegateCommand DefaultListCommand { get; set; }
         public DelegateCommand<object> PrePlayCommand { get; set; }
         public DelegateCommand AddListCommand { get; set; }
@@ -95,6 +97,7 @@ namespace WeMusic.ViewModel
 
         public void DefaultListExecute()
         {
+            ListId = string.Empty;
             var orm = new DefaultListManager();
             var list = orm.GetList();
             MusicInfos.Clear();
@@ -174,6 +177,7 @@ namespace WeMusic.ViewModel
 
         public void ClickCustomList(object parameter)
         {
+            ListId = string.Empty;
             string title = parameter.ToString();
             var ls = new CustomListManager().GetList();
             MusicInfos.Clear();
@@ -193,6 +197,7 @@ namespace WeMusic.ViewModel
         public void ClickPlatformList(object parameter)
         {
             string id = parameter.ToString();
+            ListId = id;
             var ls = new PlatformListManager().GetList();
             MusicInfos.Clear();
             ls.ForEach(item =>
@@ -218,7 +223,11 @@ namespace WeMusic.ViewModel
         public void RefreshShowList(string title)
         {
             //如果当前BasePage的DataGrid展示的是默认列表，进行刷新
-            if (PlayerList.PreListTitle == title)
+            if (PlayerList.PreListTitle != title)
+            {
+                return;
+            }
+            if (ListId == string.Empty)
             {
                 if (title == "默认列表")
                 {
@@ -229,6 +238,17 @@ namespace WeMusic.ViewModel
                     {
                         var mif = new MusicInfoManager();
                         var music = mif.Find(item.Id);
+                        MusicInfos.Add(music.ToIMusic());
+                    });
+                }
+                else if (title == "本地音乐")
+                {
+                    MusicInfos.Clear();
+                    var list = new LocalListManager().GetList();
+                    list.ForEach(item =>
+                    {
+                        var mim = new MusicInfoManager();
+                        var music = mim.Find(item.Id);
                         MusicInfos.Add(music.ToIMusic());
                     });
                 }
@@ -247,6 +267,21 @@ namespace WeMusic.ViewModel
                     });
                 }
             }
+            else
+            {
+                var ls = new PlatformListManager().GetList();
+                MusicInfos.Clear();
+                ls.ForEach(item =>
+                {
+                    if (item.PlatformId == ListId)
+                    {
+                        var mim = new MusicInfoManager();
+                        var music = mim.Find(item.MusicId);
+                        MusicInfos.Add(music.ToIMusic());
+                    }
+                });
+            }
+            
         }
 
         public async void ClickImportListExecute()
@@ -256,6 +291,7 @@ namespace WeMusic.ViewModel
 
         public void ClickLocalMusicExecute()
         {
+            ListId = string.Empty;
             MusicInfos.Clear();
             var list = new LocalListManager().GetList();
             list.ForEach(item =>

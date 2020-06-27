@@ -50,7 +50,11 @@ namespace WeMusic.Model.DbModel
         /// <returns></returns>
         public virtual bool Delete(dynamic id)
         {
-            return CurrentDb.Delete(id);
+            try
+            {
+                return CurrentDb.DeleteById(id);
+            }
+            catch { return false; }
         }
 
         /// <summary>
@@ -60,7 +64,11 @@ namespace WeMusic.Model.DbModel
         /// <returns></returns>
         public virtual bool Delete(T obj)
         {
-            return CurrentDb.Delete(obj);
+            try
+            {
+                return CurrentDb.Delete(obj);
+            }
+            catch { return false; }
         }
 
         /// <summary>

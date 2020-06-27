@@ -25,6 +25,7 @@ namespace WeMusic.ViewModel
 
         public SearchPageViewModel()
         {
+            ViewModelManager.SearchPageViewModel = this;
             SearchProgressVisibility = Visibility.Visible;
             DataVisibility = Visibility.Hidden;
             NoResultVisibility = Visibility.Hidden;
