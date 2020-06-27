@@ -29,7 +29,7 @@ namespace WeMusic.ViewModel
             /// </summary>
             public int Kind { get; set; }
             public string Value { get; set; }
-            public TagInfo(int kind,string value)
+            public TagInfo(int kind, string value)
             {
                 Kind = kind;
                 Value = value;
@@ -124,6 +124,7 @@ namespace WeMusic.ViewModel
             PlayerList.SetPreList(MusicInfos, "默认列表");
             DataGridAnimation();
         }
+
         public void PrePlayExecute(object parameter)
         {
             PlayerManager.Stop();
@@ -141,10 +142,12 @@ namespace WeMusic.ViewModel
             //通知主窗口播放
             PlayerManager.Play();
         }
+
         public async void AddListExecute()
         {
             string name = (string)await DialogManager.ShowCreateListDialog();
             if (name == null || name == string.Empty) { return; }
+            if (name == "默认列表" || name == "本地音乐") { Toast.Show($"无法添加该歌单！", Toast.InfoType.Error); return; }
             bool result = new CustomTitleManager().Insert(new CustomTitleModel(name));
             if (result)
             {
@@ -333,7 +336,7 @@ namespace WeMusic.ViewModel
                     }
                 });
             }
-            
+
         }
 
         public async void ClickImportListExecute()
@@ -358,7 +361,7 @@ namespace WeMusic.ViewModel
 
         public void ClickPlayAllExecute()
         {
-            if(MusicInfos is null || MusicInfos.Count <= 0) { return; }
+            if (MusicInfos is null || MusicInfos.Count <= 0) { return; }
             PrePlayExecute(MusicInfos[0]);
         }
 
@@ -394,7 +397,7 @@ namespace WeMusic.ViewModel
             var mim = new MusicInfoManager();
             foreach (var item in MusicInfos)
             {
-                dlm.Insert(new DefaultListModel( item.Id));
+                dlm.Insert(new DefaultListModel(item.Id));
                 mim.Insert(new MusicInfoModel(item));
             }
 
