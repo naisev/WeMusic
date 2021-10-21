@@ -8,7 +8,7 @@ using System.Windows;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("WeMusic")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("听音乐，就用微音乐")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("WeMusic")]

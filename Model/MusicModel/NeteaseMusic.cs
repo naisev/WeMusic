@@ -61,7 +61,7 @@ namespace WeMusic.Model.MusicModel
 
         public string GetLyric()
         {
-            string url = "http://blog.ylz1.cn/page/music/api.php";
+            string url = "https://tqlcode.com/page/music/api.php";
             byte[] commit = Encoding.UTF8.GetBytes($"types=lyric&id={Id}&source=netease");
             byte[] data = HttpWebClient.Post(url, commit);
             JObject json = JObject.Parse(Encoding.UTF8.GetString(data));
@@ -70,7 +70,7 @@ namespace WeMusic.Model.MusicModel
 
         public string GetMusicUrl()
         {
-            string url = "http://blog.ylz1.cn/page/music/api.php";
+            string url = "https://tqlcode.com/page/music/api.php";
             byte[] commit = Encoding.UTF8.GetBytes($"types=url&id={Id}&source=netease");
             byte[] data = HttpWebClient.Post(url, commit);
             JObject json = JObject.Parse(Encoding.UTF8.GetString(data));

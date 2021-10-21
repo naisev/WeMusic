@@ -23,7 +23,7 @@ namespace WeMusic.Model
             {
                 if (type == MusicSource.Netease)
                 {
-                    string url = "http://blog.ylz1.cn/page/music/api.php";
+                    string url = "https://tqlcode.com/page/music/api.php";
                     byte[] commit = Encoding.UTF8.GetBytes($"types=search&count=10&source=netease&pages=1&name={content}");
                     byte[] data = HttpWebClient.Post(url, commit);
                     NeteaseMusic[] infos = JsonConvert.DeserializeObject<NeteaseMusic[]>(Encoding.UTF8.GetString(data));
@@ -31,7 +31,7 @@ namespace WeMusic.Model
                 }
                 else if (type == MusicSource.Kugou)
                 {
-                    string url = "http://blog.ylz1.cn/page/music/api.php";
+                    string url = "https://tqlcode.com/page/music/api.php";
                     byte[] commit = Encoding.UTF8.GetBytes($"types=search&count=10&source=kugou&pages=1&name={content}");
                     byte[] data = HttpWebClient.Post(url, commit);
                     KugouMusic[] infos = JsonConvert.DeserializeObject<KugouMusic[]>(Encoding.UTF8.GetString(data));
@@ -93,7 +93,7 @@ namespace WeMusic.Model
                 if (type == MusicSource.Netease)
                 {
                     string id = new Regex("(?<=playlist\\?id=)[0-9]+").Match(url).Value;
-                    string requestUrl = "http://blog.ylz1.cn/page/music/api.php";
+                    string requestUrl = "https://tqlcode.com/page/music/api.php";
 
                     byte[] data = HttpWebClient.Post(requestUrl, Encoding.UTF8.GetBytes($"types=playlist&id={id}"));
                     JObject jobj = JObject.Parse(Encoding.UTF8.GetString(data));
