@@ -140,30 +140,34 @@ namespace WeMusic.Model.Player
 
         public static void DrawFFT(object sender, FftEventArgs e)
         {
-            Application.Current.Dispatcher.Invoke(() =>
+            Task.Run(() =>
             {
-                ViewModelManager.MainWindowViewModel.Points = new PointCollection();
-                for (int i = 0; i <= e.Result.Length / 4; i++)
+                Application.Current.Dispatcher.Invoke(() =>
                 {
-                    double intensityDB = 10 * Math.Log10(Math.Sqrt(e.Result[i].X * e.Result[i].X + e.Result[i].Y * e.Result[i].Y));
-                    double minDB = -90;
-                    if (intensityDB < minDB) intensityDB = minDB;
-                    double percent = intensityDB / minDB;
-                    double y = 100 * (1 - percent);
-                    if (i < e.Result.Length / 8)
+                    ViewModelManager.MainWindowViewModel.Points = new PointCollection();
+                    for (int i = 0; i <= e.Result.Length / 4; i++)
                     {
-                        y *= (double)i * 8 / e.Result.Length;
+                        double intensityDB = 10 * Math.Log10(Math.Sqrt(e.Result[i].X * e.Result[i].X + e.Result[i].Y * e.Result[i].Y));
+                        double minDB = -90;
+                        if (intensityDB < minDB) intensityDB = minDB;
+                        double percent = intensityDB / minDB;
+                        double y = 100 * (1 - percent);
+                        if (i < e.Result.Length / 8)
+                        {
+                            y *= (double)i * 8 / e.Result.Length;
+                        }
+                        else
+                        {
+                            y *= 2 - (double)i * 8 / e.Result.Length;
+                        }
+                        ViewModelManager.MainWindowViewModel.Points.Add(new Point(i * 4, 68 - y));
                     }
-                    else
-                    {
-                        y *= 2 - (double)i * 8 / e.Result.Length;
-                    }
-                    ViewModelManager.MainWindowViewModel.Points.Add(new Point(i * 4, 68 - y));
-                }
-                ViewModelManager.MainWindowViewModel.Points.Add(new Point(1024, 68));
-                ViewModelManager.MainWindowViewModel.Points.Add(new Point(0, 68));
+                    ViewModelManager.MainWindowViewModel.Points.Add(new Point(1024, 68));
+                    ViewModelManager.MainWindowViewModel.Points.Add(new Point(0, 68));
 
+                });
             });
+           
 
         }
 
