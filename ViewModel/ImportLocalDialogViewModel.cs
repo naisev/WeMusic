@@ -42,15 +42,15 @@ namespace WeMusic.ViewModel
                 {
                     artists += "、" + item;
                 }
-                if (artists != string.Empty) { artists=artists.Substring(1); }
+                if (artists != string.Empty) { artists = artists.Substring(1); }
 
-                string id = BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(File.ReadAllBytes(path))).Replace("-","");
-                
-                bool result=new MusicInfoManager().Insert(new MusicInfoModel
+                string id = BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(File.ReadAllBytes(path))).Replace("-", "");
+
+                bool result = new MusicInfoManager().Insert(new MusicInfoModel
                 {
-                    Album = tag.Album,
-                    Artists =artists,
-                    Name = tag.Title==string.Empty?Path.GetFileNameWithoutExtension(path):tag.Title,
+                    Album = tag.Album == null ? "" : tag.Album,
+                    Artists = artists,
+                    Name = string.IsNullOrEmpty(tag.Title) ? Path.GetFileNameWithoutExtension(path) : tag.Title,
                     CoverId = string.Empty,
                     Origin = Enum.MusicSource.Local,
                     SourceName = "本地音乐",
@@ -72,7 +72,7 @@ namespace WeMusic.ViewModel
                 {
                     Toast.Show("本地音乐已存在相同音乐！", Toast.InfoType.Error);
                 }
-                
+
             }
         }
 
@@ -80,7 +80,7 @@ namespace WeMusic.ViewModel
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
             dialog.Description = "请选择扫描音乐文件夹";
-            if (dialog.ShowDialog() != DialogResult.OK||dialog.SelectedPath==string.Empty)
+            if (dialog.ShowDialog() != DialogResult.OK || dialog.SelectedPath == string.Empty)
             {
                 return;
             }
@@ -88,7 +88,7 @@ namespace WeMusic.ViewModel
             int amount = 0;
             foreach (var item in files)
             {
-                if(Path.GetExtension(item)!=".mp3"&& Path.GetExtension(item) != ".wav") { continue; }
+                if (Path.GetExtension(item) != ".mp3" && Path.GetExtension(item) != ".wav") { continue; }
                 TagLib.Tag tag = TagLib.File.Create(item).Tag;
 
                 //获取艺术家
@@ -103,7 +103,7 @@ namespace WeMusic.ViewModel
 
                 bool result = new MusicInfoManager().Insert(new MusicInfoModel
                 {
-                    Album = tag.Album==null?"":tag.Album,
+                    Album = tag.Album == null ? "" : tag.Album,
                     Artists = artists,
                     Name = string.IsNullOrEmpty(tag.Title) ? Path.GetFileNameWithoutExtension(item) : tag.Title,
                     CoverId = string.Empty,
